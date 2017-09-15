@@ -14,4 +14,13 @@ class EventsController
     public function index() {
         return view('events.events');
     }
+
+    public function create()
+    {
+        return view('events.create');
+    }
+    public function join()
+    {
+        return view('events.join');
+    }
 }
