@@ -19,11 +19,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about', 'AboutUsController@index');
-Route::get('/events', 'EventsController@index');
-Route::get('/events/create', 'EventsController@create');
-Route::get('/events/join', 'EventsController@join');
+
 Route::get('/gallery', 'GalleryController@index');
-Route::get('/user/{{id}}', 'UserController@index');
+
 Route::get('/news', 'NewsController@index');
 Route::get('/stories', 'StoriesController@index');
 Route::get('/games', 'GamesController@index');
+Route::get('/games', 'GamesController@index');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::post('/events/list', 'EventsController@saveNewEvent');
+    Route::patch('/events/list', 'EventsController@joinExistingEvent');
+    Route::get('/events/list', 'EventsController@index');
+    Route::get('/user/{id}', 'UserController@index');
+    Route::post('/user/{id}', 'UserController@update');
+});

@@ -8,7 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+@if(isset(Auth::user()->id))
+{{$id=Auth::user()->id}}
+@endif
     <nav class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -32,8 +36,8 @@
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Begin your adventure <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/events/create')}}">As a dungeon master</a></li>
-                        <li><a href="{{url('/events/join')}}">As a player</a></li>
+                        <li><a href="{{url('/events/list')}}">As a dungeon master</a></li>
+                        <li><a href="{{url('/events/list')}}">As a player</a></li>
                     </ul>
                 </li>
                 <li class="dropdown active">
@@ -46,20 +50,28 @@
                         <li><a href="#">Trash</a></li>
                     </ul>
                 </li>
+                @if(isset($id))
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Campaigns</a></li>
                         <li><a href="#">Event history</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Profile details</a></li>
+                        {{--<li><a href="#">Profile details</a></li>--}}
+
+                        <li><a href="{{url('/user/' . $id)}}">Profile details</a></li>
                     </ul>
                 </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
+                @if(isset(Auth::user()->id))
+                    {{$id=Auth::user()->id}}
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+@else
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
+@endif
             </ul>
         </div>
     </nav>

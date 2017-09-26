@@ -2,8 +2,12 @@
 @section('content')
 {{--main section--}}
 
-        <a href="{{url('/events/create')}}" class="btn btn-success"> Start your quest!</a>
+        <a href="{{url('/events/join')}}" class="btn btn-success"> Begin your adventure!</a>
 
-{{--insert news here--}}
+<div class="panel panel-default">
+        <div class="panel-body">
+                You can start your own party or join an existing party of adventurer for many types of tabletop games.
+        </div>
+</div>
     
 @endsection
