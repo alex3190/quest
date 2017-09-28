@@ -10,11 +10,11 @@ class UserController extends Controller
 {
     public function index() {
 
-        $userTypes = [
+        $userTypesCharacteristics = [
             'userType' => User::TYPES,
             'availability' => User::AVAILABILITY
         ];
-        return view('account.account', $userTypes);
+        return view('account.account', $userTypesCharacteristics);
     }
 
     public function update(Request $request, $id)
@@ -25,6 +25,8 @@ class UserController extends Controller
         $user->country = $request->get('country');
         $user->city = $request->get('city');
         $user->type = $request->get('type');
+
+//        dd($user);
         $user->save();
 
         return back()->with('message', 'Your data has been saved!');;

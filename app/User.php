@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    const TYPE_DM = 'dungeonMaster';
+    const TYPE_DM = 'dungeonMasterz';
     const TYPE_PLAYER = 'player';
     const TYPE_VISITOR = 'visitor';
     const AVAIL_ANYTIME = 'anytime';
@@ -26,9 +26,9 @@ class User extends Authenticatable
     ];
 
     const TYPES = [
-        self::TYPE_DM,
-        self::TYPE_PLAYER,
-        self::TYPE_VISITOR
+        'dungeonMaster' => self::TYPE_DM,
+        'player' => self::TYPE_PLAYER,
+        'visitor' => self::TYPE_VISITOR
     ];
 
     /**

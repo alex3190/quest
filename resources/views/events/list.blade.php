@@ -11,11 +11,11 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('Which game would you play?') !!}
-                            {!! Form::select('game_type', $gameTypes, null,  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            {!! Form::select('game_type', $gameTypes, '',  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'game_type']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('How many people do you want to play with?') !!}
-                            {!! Form::number('max_nr_of_players', '', ['placeholder' => 'Max nr of players...', 'class' =>'form-control']) !!}
+                            {!! Form::number('max_nr_of_players', '' , ['placeholder' => 'Max nr of players...', 'class' =>'form-control']) !!}
                         </div>
 
                         <div class="form-group">

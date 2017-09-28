@@ -18,11 +18,11 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('Which role would you like taking?') !!}
-                            {!! Form::select('type', $userType, null,  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            {!! Form::select('type', $userType, 'dungeonMaster',  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('When are you available to play?') !!}
-                            {!! Form::select('availability', $availability, null, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            {!! Form::select('availability', $availability, 0, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('Where do you live?') !!}
