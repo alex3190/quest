@@ -34,6 +34,24 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('host_of_adventure', 'Can the group play at your place?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::checkbox('host_of_adventure', 'yes', '') !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('place', 'Do you want to play at a specific place (bar, etc?)', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::text('place', '', ['placeholder' => 'Place where you would like to play', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('inventory', 'Can you bring any props?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::text('inventory', '', ['placeholder' => 'Game books, dice, miniatures, etc...', 'class' =>'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('city', 'In what city will the adventure start? ', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::text('city', '', ['placeholder' => 'City', 'class' =>'form-control']) !!}

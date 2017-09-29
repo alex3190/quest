@@ -62,10 +62,18 @@ class AdventuresController
             $attendee->is_dm = false;
         }
 
+        if($request->get('host_of_adventure') == true) {
+            $attendee->is_host = $userId;
+        } else {
+            $attendee->is_host = false;
+        }
+
         $adventure->status = Adventure::STATUS_NEW;
         $adventure->city = $request->get('city');
         $adventure->save();
         $attendee->adventure_id = $adventure->id;
+        $attendee->place = $request->get('place');
+        $attendee->inventory = $request->get('inventory');
         $attendee->save();
 
         flash()
@@ -85,11 +93,20 @@ class AdventuresController
         return view('adventures.create', $pageData);
     }
 
-    public function joinExistingAdventure(){
+    public function joinExistingAdventure($adventureId){
 
+        $adventure = Adventure::find($adventureId);
+        $attendees = AdventureAttendee::where('adventure_id', '=', $adventureId)->get();
+
+        $pageData = [
+            'adventure' => $adventure,
+            'attendees' => $attendees,
+        ];
+
+        return view('adventures.join', $pageData);
     }
 
     public function confirmJoinExistingAdventure(){
-
+        return back();
     }
 }
