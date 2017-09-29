@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Adventure;
+use App\AdventureAttendee;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,5 +35,14 @@ class UserController extends Controller
 
         return back();
 
+    }
+
+    public function showUserAdventures($id) {
+
+        //created
+        $createdByUser = Adventure::where('user_id', '=', $id)->get();
+
+        //joined
+//        $joinedByUser = Adventure::where('user_id', '=', AdventureAttendee::where('user_id', '=', $id)->get())
     }
 }
