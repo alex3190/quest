@@ -10,9 +10,7 @@
 </head>
 
 <body>
-@if(isset(Auth::user()->id))
-{{$id=Auth::user()->id}}
-@endif
+
     <nav class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -50,7 +48,7 @@
                         <li><a href="#">Trash</a></li>
                     </ul>
                 </li>
-                @if(isset($id))
+                @if($isLoggedIn)
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -59,22 +57,23 @@
                         <li class="divider"></li>
                         {{--<li><a href="#">Profile details</a></li>--}}
 
-                        <li><a href="{{url('/user/' . $id)}}">Profile details</a></li>
+
+                        <li><a href="{{url('/user/' . $user->id)}}">Profile details</a></li>
                     </ul>
                 </li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if(isset(Auth::user()->id))
-                    {{$id=Auth::user()->id}}
+                @if($isLoggedIn)
                     <li><a href="{{ route('logout') }}">Logout</a></li>
-@else
+                @else
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
-@endif
+                @endif
             </ul>
         </div>
     </nav>
+@include('flash::message')
 @yield('content')
 </body>
 

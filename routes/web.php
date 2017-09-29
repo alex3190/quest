@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('homepage.homepage');
 });
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -27,10 +28,16 @@ Route::get('/stories', 'StoriesController@index');
 Route::get('/games', 'GamesController@index');
 Route::get('/games', 'GamesController@index');
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::post('/events/list', 'EventsController@saveNewEvent');
-    Route::patch('/events/list', 'EventsController@joinExistingEvent');
-    Route::get('/events/list', 'EventsController@index');
-    Route::get('/user/{id}', 'UserController@index');
-    Route::post('/user/{id}', 'UserController@update');
+Route::middleware('auth')->group(function(){
+    Route::prefix('events')->group(function() {
+        Route::post('list', 'EventsController@saveNewEvent');
+        Route::patch('list', 'EventsController@joinExistingEvent');
+        Route::get('list', 'EventsController@index');
+    });
+
+    Route::prefix('user')->group(function() {
+        Route::get('{id}', 'UserController@index')->name('users.show');
+        Route::post('{id}', 'UserController@update')->name('users.update');
+    });
+
 });

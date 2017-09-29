@@ -1,46 +1,43 @@
 @extends('navigation')
 @section('content')
     {{$id = Auth::user()->id}}
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
     {{--</form>--}}
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 col-lg-8 col-lg-offset-2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Tell us about yourself!</div>
                     <div class="panel-body">
+                        {!! Form::open(['route' => ["users.update", $id], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
                         <div class="form-group">
-                            {!! Form::model(['url' => "/user/" . $id, 'method' => 'post'], ['class' =>"form-horizontal"]) !!}
+                            {!! Form::label('type', 'Which role would you like taking?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::select('type', $userType, 'dungeonMaster',  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('Which role would you like taking?') !!}
-                            {!! Form::select('type', $userType, 'dungeonMaster',  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            {!! Form::label('availability', 'When are you available to play?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                            {!! Form::select('availability', $availability, 'weeknights', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                                </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('When are you available to play?') !!}
-                            {!! Form::select('availability', $availability, 0, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('Where do you live?') !!}
+                            {!! Form::label('country', 'Where do you live?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
                             {!! Form::text('country', '', ['placeholder' => 'Country of residence', 'class' =>'form-control']) !!}
+                            </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('city', 'Where do you live?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
                             {!! Form::text('city', '', ['placeholder' => 'City of residence', 'class' =>'form-control']) !!}
+                                </div>
                         </div>
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::label('Which games would you like to play?') !!}--}}
-                            {{--{!! Form::text('game', '', ['placeholder' => 'Which games do you want to play?', 'class' =>'form-control']) !!}--}}
-                        {{--</div>--}}
-                        <div class="form-group">
-                            {!! Form::submit('Save', ['class' =>'form-control btn btn-sm btn-primary']) !!}
+
+                        <div class="clearfix text-center">
+                            {!! Form::submit('Save', ['class' =>'btn btn-sm btn-primary']) !!}
                         </div>
-                        <div class="form-group">
-                            {!! Form::close() !!}
-                        </div>
+                        {!! Form::close() !!}
                     </div>
 
                 </div>

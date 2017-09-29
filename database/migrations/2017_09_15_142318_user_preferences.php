@@ -14,10 +14,10 @@ class UserPreferences extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->enum('type', ['dungeonMaster', 'player', 'visitor'])->nullable();
+            $table->enum('type', ['dungeonMaster', 'player', 'visitor']);
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->enum('availability', ['anytime', 'weeknights', 'weekdays', 'weekend', 'none'])->nullable();
+            $table->enum('availability', ['anytime', 'weeknights', 'weekdays', 'weekend', 'none']);
             $table->string('game')->nullable();
         });
     }

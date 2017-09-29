@@ -11,25 +11,27 @@ class UserController extends Controller
     public function index() {
 
         $userTypesCharacteristics = [
-            'userType' => User::TYPES,
-            'availability' => User::AVAILABILITY
+            'userType' => array_combine(User::TYPES, User::TYPES),
+            'availability' => array_combine(User::AVAILABILITY, User::AVAILABILITY),
         ];
+
         return view('account.account', $userTypesCharacteristics);
     }
 
     public function update(Request $request, $id)
     {
+
         $user = User::find($id);
         $user->game = $request->get('game');
         $user->availability = $request->get('availability');
         $user->country = $request->get('country');
         $user->city = $request->get('city');
         $user->type = $request->get('type');
-
-//        dd($user);
         $user->save();
 
-        return back()->with('message', 'Your data has been saved!');;
+        flash()->success('daaaaaa')->important();
+
+        return back();
 
     }
 }
