@@ -17,7 +17,6 @@ class UserPreferences extends Migration
             $table->enum('type', ['dungeonMaster', 'player', 'visitor']);
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->enum('availability', ['anytime', 'weeknights', 'weekdays', 'weekend', 'none']);
             $table->string('game')->nullable();
         });
     }

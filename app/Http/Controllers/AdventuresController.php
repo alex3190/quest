@@ -52,7 +52,7 @@ class AdventuresController
         $pageData = [
             'adventureStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
             'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
-            'availability' => array_combine(User::AVAILABILITY, User::AVAILABILITY),
+            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
 
         return view('adventures.create', $pageData);
@@ -95,11 +95,11 @@ class AdventuresController
         $attendee->place = $request->get('place');
         $attendee->inventory = $request->get('inventory');
         $attendee->experience_with_games = $request->get('experience_with_games');
+        $attendee->availability = $request->get('availability');
         $attendee->save();
 
-        //save user's availability
-        $user->availability = $request->get('availability');
-        $user->save();
+
+
 
         //success message
         flash()
@@ -132,7 +132,7 @@ class AdventuresController
             $userNames[] = $user->name;
             $dmOptions[] = $attendee->is_dm;
             $experienceWithGames[] = $attendee->experience_with_games;
-            $everyonesAvailability[] = $user->availability;
+            $everyonesAvailability[] = $attendee->availability;
         }
 
         //calculate how many players are needed
@@ -146,7 +146,7 @@ class AdventuresController
             'availabilities' => $everyonesAvailability,
             'spotsLeft' => $nrOfRemainingSpots,
             'experienceWithGames' => $experienceWithGames,
-            'availability' => array_combine(User::AVAILABILITY, User::AVAILABILITY),
+            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
 
         return view('adventures.join', $pageData);
@@ -161,12 +161,8 @@ class AdventuresController
      */
     public function confirmJoinExistingAdventure(Request $request, $adventureId){
 
-
         $attendee = new AdventureAttendee();
         $userId = Auth::user()->id;
-
-        $user = User::find($userId);
-        $adventure = Adventure::find($adventureId);
         $attendee->user_id = $userId;
 
         if($request->get('dungeon_master') == true) {
@@ -184,11 +180,10 @@ class AdventuresController
         $attendee->adventure_id = $adventureId;
         $attendee->place = $request->get('place');
         $attendee->inventory = $request->get('inventory');
+        $attendee->availability = $request->get('availability');
         $attendee->experience_with_games = $request->get('experience_with_games');
         $attendee->save();
-        $adventure->save();
-        $user->availability = $request->get('availability');
-        $user->save();
+
         return back();
     }
 }
