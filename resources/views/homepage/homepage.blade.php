@@ -2,7 +2,7 @@
 @section('content')
 {{--main section--}}
 
-        <a href="{{url('/events/join')}}" class="btn btn-success"> Begin your adventure!</a>
+        <a href="{{url('/adventures')}}" class="btn btn-success"> Begin your adventure!</a>
 
 <div class="panel panel-default">
         <div class="panel-body">
