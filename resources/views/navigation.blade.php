@@ -25,27 +25,15 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{url('/')}}">Home</a></li>
-                <li class="active"><a href="{{url('/news')}}">News</a></li>
                 <li class="active"><a href="{{url('/about')}}">About us</a></li>
-                <li class="active"><a href="{{url('/events')}}">Events</a></li>
+                <li class="active"><a href="{{url('/news')}}">News</a></li>
+                <li class="active"><a href="{{url('/adventures')}}">Events</a></li>
                 <li class="active"><a href="{{url('/gallery')}}">Gallery</a></li>
-                <li class="active"><a href="{{url('/stories')}}">Stories and adventures</a></li>
                 <li class="dropdown active">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Begin your adventure <b class="caret"></b></a>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Adventures <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/adventures')}}">As a dungeon master</a></li>
-                        <li><a href="{{url('/adventures')}}">As a player</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown active">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Games <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">D&D 5e</a></li>
-                        <li><a href="#">Numenera</a></li>
-                        <li><a href="#">Sent Items</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Trash</a></li>
+                        <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
+                        <li><a href="{{url('/adventures')}}">Create a new party</a></li>
                     </ul>
                 </li>
                 @if($isLoggedIn)
@@ -53,6 +41,7 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('/user/' . $user->id)}}">Profile details</a></li>
+                        <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
                     </ul>
                 </li>
                 @endif

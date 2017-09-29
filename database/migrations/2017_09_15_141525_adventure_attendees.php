@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventAttendees extends Migration
+class AdventureAttendees extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class EventAttendees extends Migration
      */
     public function up()
     {
-        Schema::create('event_attendees', function(Blueprint $table) {
-            $table->integer('event_id');
+        Schema::create('adventure_attendees', function(Blueprint $table) {
+            $table->integer('adventure_id');
             $table->integer('user_id');
         });
 
@@ -27,6 +27,6 @@ class EventAttendees extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_attendees');
+        Schema::dropIfExists('adventure_attendees');
     }
 }

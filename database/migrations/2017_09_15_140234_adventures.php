@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Events extends Migration
+class Adventures extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Events extends Migration
      */
     public function up()
     {
-        Schema::create('events', function(Blueprint $table) {
+        Schema::create('adventures', function(Blueprint $table) {
             $table->increments('id');
             $table->enum('game_type', ['dnd5e', 'pathfinder', 'numenera', 'boardgames']);
             $table->integer('max_nr_of_players');
@@ -34,6 +34,6 @@ class Events extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('adventures');
     }
 }

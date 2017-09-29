@@ -30,14 +30,15 @@ Route::get('/games', 'GamesController@index');
 
 Route::middleware('auth')->group(function(){
     Route::prefix('adventures')->group(function() {
-        Route::post('', 'EventsController@saveNewEvent')->name('adventures.save');
-        Route::patch('{id}/join', 'EventsController@joinExistingEvent')->name('adventures.join');
-        Route::get('', 'EventsController@index')->name('adventures.show');;
+        Route::post('', 'AdventuresController@saveNewAdventure')->name('adventures.save');
+        Route::patch('{id}/join', 'AdventuresController@joinExistingAdventure')->name('adventures.join');
+        Route::get('', 'AdventuresController@index')->name('adventures.show');;
     });
 
     Route::prefix('user')->group(function() {
         Route::get('{id}', 'UserController@index')->name('users.show');
         Route::post('{id}', 'UserController@update')->name('users.update');
+        Route::get('{id}/adventures', 'UserController@listAdventure')->name('users.adventures');
     });
 
 });

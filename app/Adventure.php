@@ -11,7 +11,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Adventure extends Model
 {
     const STATUS_NEW = 'new';
     const STATUS_PLANNED = 'planned';
