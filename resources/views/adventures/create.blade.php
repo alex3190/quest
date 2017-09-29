@@ -46,6 +46,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('experience_with_games', 'Do you have experience with any kind of tabletop games?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::text('experience_with_games', '', ['placeholder' => 'What games, for how long?', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('inventory', 'Can you bring any props?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::text('inventory', '', ['placeholder' => 'Game books, dice, miniatures, etc...', 'class' =>'form-control']) !!}
@@ -55,6 +61,12 @@
                             {!! Form::label('city', 'In what city will the adventure start? ', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::text('city', '', ['placeholder' => 'City', 'class' =>'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('availability', 'When will the signs foretell the beginning of your quests? When can you play?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::select('availability', $availability, 'anytime', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
                             </div>
                         </div>
                         <div class="clearfix text-center">

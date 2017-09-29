@@ -19,6 +19,7 @@ class AdventureAttendees extends Migration
             $table->boolean('is_host');
             $table->string('place');
             $table->string('inventory');
+            $table->string('experience_with_games');
             $table->integer('user_id');
             $table->timestamps();
         });
