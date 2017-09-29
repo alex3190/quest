@@ -18,7 +18,7 @@
                         <div class="form-group">
                             {!! Form::label('availability', 'When are you available to play?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                            {!! Form::select('availability', $availability, 'weeknights', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                            {!! Form::select('availability', $availability, 'anytime', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
                                 </div>
                         </div>
                         <div class="form-group">

@@ -29,7 +29,7 @@ class UserController extends Controller
         $user->type = $request->get('type');
         $user->save();
 
-        flash()->success('daaaaaa')->important();
+        flash()->success('Succesfully updated your info!')->important();
 
         return back();
 

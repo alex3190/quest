@@ -26,8 +26,8 @@ class EventsController
         }
         $pageData = [
             'events' => $allEvents,
-            'eventStatuses' => Event::STATUSES,
-            'gameTypes' => Event::GAMES,
+            'eventStatuses' => array_combine(Event::STATUSES, Event::STATUSES),
+            'gameTypes' => array_combine(Event::GAMES, Event::GAMES),
         ];
         return view('events.list', $pageData);
     }

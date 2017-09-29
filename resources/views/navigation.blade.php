@@ -34,8 +34,8 @@
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Begin your adventure <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/events/list')}}">As a dungeon master</a></li>
-                        <li><a href="{{url('/events/list')}}">As a player</a></li>
+                        <li><a href="{{url('/events')}}">As a dungeon master</a></li>
+                        <li><a href="{{url('/events')}}">As a player</a></li>
                     </ul>
                 </li>
                 <li class="dropdown active">
