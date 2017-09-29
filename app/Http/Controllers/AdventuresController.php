@@ -11,7 +11,6 @@ namespace App\Http\Controllers;
 
 use App\Adventure;
 use App\AdventureAttendee;
-use App\EventAttendee;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +18,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AdventuresController
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Base method of Adventures, used to get all adventures
+     */
     public function index() {
         $allAdventures = Adventure::all();
-
-
         foreach($allAdventures as $adventure){
             $dungeonMaster = User::find($adventure->dungeon_master);
             if(isset($adventure->dungeon_master)){
@@ -30,8 +32,8 @@ class AdventuresController
             } else {
                 $adventure->dungeon_master_name = 'No DM signed up yet!';
             }
-
         }
+
         $pageData = [
             'adventures' => $allAdventures,
             'adventureStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
@@ -41,6 +43,11 @@ class AdventuresController
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * used for sending data and showing the create adventure view
+     */
     public function createNewAdventure(){
         $pageData = [
             'adventureStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
@@ -51,39 +58,50 @@ class AdventuresController
         return view('adventures.create', $pageData);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * logic for saving a new adventure with data from the view
+     */
     public function saveNewAdventure(Request $request)
     {
         $userId = Auth::user()->id;
         $user = User::find($userId);
         $attendee = new AdventureAttendee();
         $adventure = new Adventure();
+
+        //save stuff on adventure
+        $adventure->status = Adventure::STATUS_NEW;
+        $adventure->city = $request->get('city');
         $adventure->game_type = $request->get('game_type');
         $adventure->max_nr_of_players = $request->get('max_nr_of_players');
         $attendee->user_id = $userId;
+        $adventure->save();
 
+        //save on attendee
         if($request->get('host_of_adventure') == true) {
             $attendee->is_host = $userId;
         } else {
             $attendee->is_host = false;
         }
-
-        $adventure->status = Adventure::STATUS_NEW;
-        $adventure->city = $request->get('city');
-        $adventure->save();
-
-        $attendee->adventure_id = $adventure->id;
-        $attendee->place = $request->get('place');
-        $attendee->inventory = $request->get('inventory');
         if($request->get('dungeon_master') == null) {
             $attendee->is_dm = false;
         } else {
             $attendee->is_dm = true;
         }
+
+        $attendee->adventure_id = $adventure->id;
+        $attendee->place = $request->get('place');
+        $attendee->inventory = $request->get('inventory');
         $attendee->experience_with_games = $request->get('experience_with_games');
         $attendee->save();
+
+        //save user's availability
         $user->availability = $request->get('availability');
         $user->save();
 
+        //success message
         flash()
             ->success(
             'Succesfully created adventure #' . $attendee->adventure_id .
@@ -93,6 +111,12 @@ class AdventuresController
     }
 
 
+    /**
+     * @param $adventureId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * renders the join adventure view, that also allows users to see data about the adveture.
+     */
     public function joinExistingAdventure($adventureId){
 
         $adventure = Adventure::find($adventureId);
@@ -128,6 +152,13 @@ class AdventuresController
         return view('adventures.join', $pageData);
     }
 
+    /**
+     * @param Request $request
+     * @param $adventureId
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * logic for the form on the join adventure page
+     */
     public function confirmJoinExistingAdventure(Request $request, $adventureId){
 
 
