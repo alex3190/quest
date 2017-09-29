@@ -19,7 +19,7 @@ class Adventures extends Migration
             $table->integer('max_nr_of_players');
             $table->boolean('is_full');
             $table->boolean('occurred');
-            $table->integer('dungeon_master');
+            $table->integer('dungeon_master')->nullable();
             $table->enum('status', ['new', 'planned', 'occurred']);
             $table->string('city');
             $table->timestamps();

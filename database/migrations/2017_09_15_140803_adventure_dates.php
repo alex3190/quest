@@ -15,6 +15,7 @@ class AdventureDates extends Migration
     {
         Schema::create('adventure_dates', function(Blueprint $table) {
             $table->integer('adventure_id');
+            $table->string('hosted_at_location');
             $table->date('adventure_date');
         });
 

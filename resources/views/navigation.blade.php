@@ -27,13 +27,13 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{url('/about')}}">About us</a></li>
                 <li class="active"><a href="{{url('/news')}}">News</a></li>
-                <li class="active"><a href="{{url('/adventures')}}">Events</a></li>
+                <li class="active"><a href="{{url('/adventures')}}">TBD</a></li>
                 <li class="active"><a href="{{url('/gallery')}}">Gallery</a></li>
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Adventures <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
-                        <li><a href="{{url('/adventures')}}">Create a new party</a></li>
+                        <li><a href="{{url('/adventures/create')}}">Create a new party</a></li>
                     </ul>
                 </li>
                 @if($isLoggedIn)

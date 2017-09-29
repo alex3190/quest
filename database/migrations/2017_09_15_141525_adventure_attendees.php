@@ -15,7 +15,9 @@ class AdventureAttendees extends Migration
     {
         Schema::create('adventure_attendees', function(Blueprint $table) {
             $table->integer('adventure_id');
+            $table->boolean('is_dm');
             $table->integer('user_id');
+            $table->timestamps();
         });
 
     }
