@@ -29,7 +29,7 @@ class AdventuresController
             'eventStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
             'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
         ];
-        return view('events.list', $pageData);
+        return view('adventures.list', $pageData);
     }
 
 
