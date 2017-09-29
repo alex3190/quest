@@ -17,8 +17,6 @@ class Adventures extends Migration
             $table->increments('id');
             $table->enum('game_type', ['dnd5e', 'pathfinder', 'numenera', 'boardgames']);
             $table->integer('max_nr_of_players');
-            $table->boolean('is_full');
-            $table->boolean('occurred');
             $table->integer('dungeon_master')->nullable();
             $table->enum('status', ['new', 'planned', 'occurred']);
             $table->string('city');

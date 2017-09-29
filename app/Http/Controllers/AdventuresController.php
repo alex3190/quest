@@ -97,10 +97,36 @@ class AdventuresController
 
         $adventure = Adventure::find($adventureId);
         $attendees = AdventureAttendee::where('adventure_id', '=', $adventureId)->get();
+        $dms = AdventureAttendee::where('is_dm', '=', true)->get();
+        $userNames = [];
+        $dmNames = [];
+        $everyonesAvailability = [];
 
+        foreach($attendees as $attendee){
+            $userId = $attendee->user_id;
+            $userNames[] = User::find($userId)->name;
+        }
+
+        foreach($dms as $dm) {
+            $dmId = $dm->user_id;
+            $dmNames[] = User::find($dmId)->name;
+        }
+
+        foreach($attendees as $attendee){
+            $userId = $attendee->user_id;
+            if(isset(User::find($userId)->availability)){
+                $everyonesAvailability[] = User::find($userId)->availability;
+            } else {
+                $everyonesAvailability[] = 'Not specified';
+            }
+
+        }
         $pageData = [
             'adventure' => $adventure,
             'attendees' => $attendees,
+            'userNames' => $userNames,
+            'dmNames' => $dmNames,
+            'availabilities' => $everyonesAvailability
         ];
 
         return view('adventures.join', $pageData);
