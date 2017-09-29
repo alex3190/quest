@@ -6,7 +6,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Start your own game party!</div>
                     <div class="panel-body">
-                        {!! Form::open(['route' =>['events.save'], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
+                        {!! Form::open(['route' =>['adventures.save'], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
                         <div class="form-group">
                             {!! Form::label('game_type', 'Which game would you play?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">

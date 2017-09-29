@@ -29,10 +29,10 @@ Route::get('/games', 'GamesController@index');
 Route::get('/games', 'GamesController@index');
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('events')->group(function() {
-        Route::post('', 'EventsController@saveNewEvent')->name('events.save');
-        Route::patch('{id}/join', 'EventsController@joinExistingEvent')->name('events.join');
-        Route::get('', 'EventsController@index')->name('events.show');;
+    Route::prefix('adventures')->group(function() {
+        Route::post('', 'EventsController@saveNewEvent')->name('adventures.save');
+        Route::patch('{id}/join', 'EventsController@joinExistingEvent')->name('adventures.join');
+        Route::get('', 'EventsController@index')->name('adventures.show');;
     });
 
     Route::prefix('user')->group(function() {

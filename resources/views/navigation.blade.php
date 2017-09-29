@@ -34,8 +34,8 @@
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Begin your adventure <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/events')}}">As a dungeon master</a></li>
-                        <li><a href="{{url('/events')}}">As a player</a></li>
+                        <li><a href="{{url('/adventures')}}">As a dungeon master</a></li>
+                        <li><a href="{{url('/adventures')}}">As a player</a></li>
                     </ul>
                 </li>
                 <li class="dropdown active">
@@ -52,12 +52,6 @@
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Campaigns</a></li>
-                        <li><a href="#">Event history</a></li>
-                        <li class="divider"></li>
-                        {{--<li><a href="#">Profile details</a></li>--}}
-
-
                         <li><a href="{{url('/user/' . $user->id)}}">Profile details</a></li>
                     </ul>
                 </li>
