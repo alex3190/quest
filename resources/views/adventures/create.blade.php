@@ -15,7 +15,7 @@
                     <div class="panel-body">
                         {!! Form::open(['route' =>['adventures.save'], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
                         <div class="form-group">
-                            {!! Form::label('game_type', 'Which game would you play?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('game_type', 'In what world will you play?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::select('game_type', $gameTypes, 'dnd5e',  ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'game_type']) !!}
                             </div>
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('dungeon_master', 'Do you want to be the DM ?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('dungeon_master', 'Would you like to be the game master?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::checkbox('dungeon_master', 'yes', '') !!}
                             </div>
@@ -46,15 +46,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('experience_with_games', 'Do you have experience with any kind of tabletop games?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('experience_with_games', 'What other quests have you embarked on?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::text('experience_with_games', '', ['placeholder' => 'What games, for how long?', 'class' => 'form-control']) !!}
+                                {!! Form::text('experience_with_games', '', ['placeholder' => 'What games have you played and for how long?', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('inventory', 'Can you bring any props?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('inventory', 'Party inventory (what can you bring to this quest)?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::text('inventory', '', ['placeholder' => 'Game books, dice, miniatures, etc...', 'class' =>'form-control']) !!}
+                                {!! Form::text('inventory', '', ['placeholder' => 'Example: Game manual, dice, miniatures, combat grid, etc.', 'class' =>'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">

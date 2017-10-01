@@ -23,18 +23,18 @@ Route::get('/about', 'AboutUsController@index');
 
 Route::get('/gallery', 'GalleryController@index');
 
-Route::get('/news', 'NewsController@index');
 Route::get('/stories', 'StoriesController@index');
 Route::get('/games', 'GamesController@index');
 Route::get('/games', 'GamesController@index');
+
+Route::get('/adventures', 'AdventuresController@index')->name('adventures.show');
 
 Route::middleware('auth')->group(function(){
     Route::prefix('adventures')->group(function() {
         Route::get('/create', 'AdventuresController@createNewAdventure')->name('adventures.create');
         Route::post('/create', 'AdventuresController@saveNewAdventure')->name('adventures.save');
-        Route::get('{id}/join', 'AdventuresController@joinExistingAdventure')->name('adventures.join');
         Route::post('{id}/join', 'AdventuresController@confirmJoinExistingAdventure')->name('adventures.confirmJoin');
-        Route::get('', 'AdventuresController@index')->name('adventures.show');;
+        Route::get('{id}/join', 'AdventuresController@joinExistingAdventure')->name('adventures.join');
     });
 
     Route::prefix('user')->group(function() {

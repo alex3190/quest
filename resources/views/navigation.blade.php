@@ -26,8 +26,9 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{url('/about')}}">About us</a></li>
-                <li class="active"><a href="{{url('/news')}}">News</a></li>
-                <li class="active"><a href="{{url('/adventures')}}">TBD</a></li>
+                <li class="active"><a href="{{url('/events')}}">Events</a></li>
+                <li class="active"><a href="{{url('/tools')}}">Game aids</a></li>
+                <li class="active"><a href="{{url('/campaigns')}}">Campaigns and stories</a></li>
                 <li class="active"><a href="{{url('/gallery')}}">Gallery</a></li>
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Adventures <b class="caret"></b></a>

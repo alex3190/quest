@@ -14,7 +14,7 @@ class UserController extends Controller
 
         $userTypesCharacteristics = [
             'userType' => array_combine(User::TYPES, User::TYPES),
-            'availability' => array_combine(User::AVAILABILITY, User::AVAILABILITY),
+            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
 
         return view('account.account', $userTypesCharacteristics);
