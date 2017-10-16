@@ -12,10 +12,10 @@
         <table class="table table-hover table-condensed table-inverse">
             <thead>
             <tr>
-                <td>Adventurer group #</td>
+                <td>#</td>
                 <td>Game type</td>
-                <td>Who's the DM?</td>
-                <td>Max number of players</td>
+                <td>Is there a DM?</td>
+                <td>Adventure initiator</td>
                 <td>Free slots</td>
                 <td>Location</td>
                 <td>Created at</td>
@@ -29,9 +29,8 @@
                         <td>{{$adventure->id}}</td>
                         <td>{{$adventure->game_type}}</td>
                         <td>{{$adventure->dungeon_master_name}}</td>
-                        <td>{{$adventure->max_nr_of_players}}</td>
-                        {{--todo fix this to calculate available nr of players--}}
-                        <td>{{0}}</td>
+                        <td>{{$adventure->created_by_name}}</td>
+                        <td>{{$adventure->freeSlots}}</td>
                         <td>{{$adventure->city}}</td>
                         <td>{{$adventure->created_at}}</td>
                         <div class="row">
@@ -46,10 +45,9 @@
             </div>
         </table>
     </div>
+    <div style="float: right;">
+        {{ $adventures->links() }}
     </div>
-    </div>
-    </div>
-
 @endsection
 
 

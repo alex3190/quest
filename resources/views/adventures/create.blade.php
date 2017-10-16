@@ -28,15 +28,15 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('dungeon_master', 'Would you like to be the game master?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('is_dm', 'Would you like to be the game master?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::checkbox('dungeon_master', 'yes', '') !!}
+                                {!! Form::checkbox('is_dm', true, false) !!}
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('host_of_adventure', 'Can the group play at your place?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('is_host', 'Can the group play at your place?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::checkbox('host_of_adventure', 'yes', '') !!}
+                                {!! Form::checkbox('is_host', true, false) !!}
                             </div>
                         </div>
                         <div class="form-group">

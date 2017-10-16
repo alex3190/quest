@@ -23,9 +23,8 @@ Route::get('/about', 'AboutUsController@index');
 
 Route::get('/gallery', 'GalleryController@index');
 
-Route::get('/stories', 'StoriesController@index');
-Route::get('/games', 'GamesController@index');
-Route::get('/games', 'GamesController@index');
+//Route::get('/stories', 'StoriesController@index');
+//Route::get('/games', 'GamesController@index');
 
 Route::get('/adventures', 'AdventuresController@index')->name('adventures.show');
 
@@ -35,12 +34,16 @@ Route::middleware('auth')->group(function(){
         Route::post('/create', 'AdventuresController@saveNewAdventure')->name('adventures.save');
         Route::post('{id}/join', 'AdventuresController@confirmJoinExistingAdventure')->name('adventures.confirmJoin');
         Route::get('{id}/join', 'AdventuresController@joinExistingAdventure')->name('adventures.join');
+        Route::get('{id}/manage', 'AdventuresController@manageAdventure')->name('adventures.manage');
+        Route::post('{id}/manage', 'AdventuresController@manageAdventure')->name('adventures.manage');
+        Route::get('{id}/delete', 'AdventuresController@manageAdventure')->name('adventures.manage');
+        Route::delete('{id}/delete', 'AdventuresController@deleteAdventure')->name('adventures.delete');
     });
 
     Route::prefix('user')->group(function() {
         Route::get('{id}', 'UserController@index')->name('users.show');
         Route::post('{id}', 'UserController@update')->name('users.update');
-        Route::get('{id}/adventures', 'UserController@listAdventure')->name('users.adventures');
+        Route::get('{id}/adventures', 'UserController@showUserAdventures')->name('account.adventures');
     });
 
 });

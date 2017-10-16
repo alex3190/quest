@@ -13,16 +13,25 @@ class AdventureAttendees extends Migration
      */
     public function up()
     {
+
         Schema::create('adventure_attendees', function(Blueprint $table) {
-            $table->integer('adventure_id');
-            $table->boolean('is_dm');
-            $table->boolean('is_host');
-            $table->string('place');
-            $table->string('inventory');
+            $table->integer('adventure_id')->unsigned();
+            $table->increments('id');
+            $table->boolean('is_dm')->nullable();
+            $table->boolean('is_host')->nullable();
+            $table->string('place')->nullable();
+            $table->string('inventory')->nullable();
             $table->enum('availability', ['anytime', 'weeknights', 'weekdays', 'weekend', 'none']);
-            $table->string('experience_with_games');
-            $table->integer('user_id');
+            $table->string('experience_with_games')->nullable();
+            $table->integer('user_id')->unsigned();
+
             $table->timestamps();
+
+        });
+
+        Schema::table('adventure_attendees', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('adventure_id')->references('id')->on('adventures');
         });
 
     }

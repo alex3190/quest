@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexandrabulearca
- * Date: 29/09/17
- * Time: 13:43
- */
-
 namespace App;
 
 
@@ -27,5 +20,20 @@ class AdventureAttendee extends Model
         self::AVAIL_WEEKDAY,
         self::AVAIL_NEVER
     ];
+
+    public $casts = [
+        'is_dm' => 'boolean',
+        'is_host' => 'boolean',
+    ];
+
+    public function adventures()
+    {
+        return $this->belongsTo('App\Adventure', 'id', 'adventure_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
 }

@@ -35,4 +35,12 @@ class Adventure extends Model
         self::GAME_NUMENERA
     ];
 
+    /**
+     * Get the attendees for an adventure.
+     */
+    public function attendees()
+    {
+        return $this->hasMany('App\AdventureAttendee', 'adventure_id', 'id');
+    }
+
 }

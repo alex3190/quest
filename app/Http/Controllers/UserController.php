@@ -37,12 +37,28 @@ class UserController extends Controller
 
     }
 
-    public function showUserAdventures($id) {
+    public function showUserAdventures()
+    {
+        $userId = Auth::user()->id;
+        $adventureIds = User::find($userId)->attendees()->get(['adventure_id']);
+        $adventures = Adventure::find($adventureIds);
 
-        //created
-        $createdByUser = Adventure::where('user_id', '=', $id)->get();
+        foreach($adventures as $adventure) {
+            $firstAttendeeThatIsDm = Adventure::find($adventure->id)->attendees()->where('is_dm', true)->first();
+            if(isset($firstAttendeeThatIsDm)) {
+                $adventure->dungeon_master_name = User::find($firstAttendeeThatIsDm->user_id)->name;
+            } else {
+                $adventure->dungeon_master_name = 'No DM signed up yet!';
+            }
+            $adventure->freeSlots = $adventure->max_nr_of_players - count(Adventure::find($adventure->id)->attendees()) +1; //1 because we don't count the dm
 
-        //joined
-//        $joinedByUser = Adventure::where('user_id', '=', AdventureAttendee::where('user_id', '=', $id)->get())
+        }
+
+        $viewData = [
+            'adventures' => $adventures,
+
+        ];
+        return view('account.adventures', $viewData);
+
     }
 }

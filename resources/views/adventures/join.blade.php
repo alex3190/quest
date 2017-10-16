@@ -84,6 +84,12 @@
                                     <td>{{$attendee->inventory}}</td>
                                 @endforeach
                             </tr>
+                            <tr>
+                                <th>What other quests has he/she you embarked on before?</th>
+                                @foreach($attendees as $attendee)
+                                    <td>{{$attendee->experience_with_games}}</td>
+                                @endforeach
+                            </tr>
                             </tbody>
                         </table>
                     </div>
