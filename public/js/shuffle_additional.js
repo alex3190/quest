@@ -1,5 +1,8 @@
 var shuffleme = (function( $ ) {
     'use strict';
+    // None of these need to be executed synchronously
+
+
     var $grid = $('#grid'), //locate what we want to sort
         $filterOptions = $('.portfolio-sorting li'),  //locate the filter categories
         $sizer = $grid.find('.shuffle_sizer'),    //sizer stores the size of the items
@@ -10,6 +13,7 @@ var shuffleme = (function( $ ) {
             setTimeout(function() {
                 listen();
                 setupFilters();
+                setupSearching();
             }, 100);
 
             // instantiate the plugin
@@ -19,6 +23,25 @@ var shuffleme = (function( $ ) {
             });
         },
 
+
+
+    setupSearching = function() {
+        // Advanced filtering
+        $('.js-shuffle-search').on('keyup change', function() {
+            var val = this.value.toLowerCase();
+            $grid.shuffle('shuffle', function($el, shuffle) {
+                // Only search elements in the current group
+                if (shuffle.group !== 'all' && $.inArray(shuffle.group, $el.data('groups')) === -1) {
+                    return false;
+                }
+                var text = $.trim( $el.find('.picture-item__title').text() ).toLowerCase();
+                return text.indexOf(val) !== -1;
+
+            });
+
+        });
+
+    },
 
 
     // Set up button clicks
@@ -83,6 +106,9 @@ var shuffleme = (function( $ ) {
         init: init
     };
 }( jQuery ));
+
+
+
 
 $(document).ready(function()
 {

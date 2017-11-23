@@ -20,7 +20,7 @@ class GalleryController
             $images = [];
             for($i=3; $i<=6; $i++){
                 if(!empty($image[$i])){
-                    $images[] = '"' . $image[$i] . '"';
+                    $images[] = '"' . strtolower($image[$i]) . '"';
                     $allTags[] = strtolower($image[$i]);
                 }
 
@@ -35,6 +35,8 @@ class GalleryController
             'tags' => $finalItems,
             'uniqueTags' => array_unique($allTags)
         ];
+
+//        dd($csv['uniqueTags']);
         return view('gallery.gallery', $csv);
     }
 }
