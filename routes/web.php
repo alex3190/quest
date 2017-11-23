@@ -16,11 +16,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/about', 'AboutUsController@index');
-
+//Route::get('/events', 'EventsController@index');
 Route::get('/gallery', 'GalleryController@index');
 
 //Route::get('/stories', 'StoriesController@index');

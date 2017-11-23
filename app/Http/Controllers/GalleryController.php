@@ -12,6 +12,29 @@ namespace App\Http\Controllers;
 class GalleryController
 {
     public function index() {
-        return view('gallery.gallery');
+
+        $parsedCsv = array_map('str_getcsv', file('imageData.csv'));
+
+        //gets tags per image
+        foreach($parsedCsv as $image){
+            $images = [];
+            for($i=3; $i<=6; $i++){
+                if(!empty($image[$i])){
+                    $images[] = '"' . $image[$i] . '"';
+                    $allTags[] = strtolower($image[$i]);
+                }
+
+            }
+            $finalItems[] = implode(', ', $images);
+
+        }
+
+
+        $csv = [
+            'csv'=> $parsedCsv,
+            'tags' => $finalItems,
+            'uniqueTags' => array_unique($allTags)
+        ];
+        return view('gallery.gallery', $csv);
     }
 }
