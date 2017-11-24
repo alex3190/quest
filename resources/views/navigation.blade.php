@@ -46,7 +46,6 @@
                 <li class="dropdown active">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('/user/' . $user->id)}}">Profile details</a></li>
                         <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
                     </ul>
                 </li>

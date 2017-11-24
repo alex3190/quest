@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function(){
         Route::get('{id}', 'UserController@index')->name('users.show');
         Route::post('{id}', 'UserController@update')->name('users.update');
         Route::get('{id}/adventures', 'UserController@showUserAdventures')->name('account.adventures');
+        Route::post('{id}/adventures/{adventureId}/unattend', 'UserController@leaveAdventure')->name('account.leaveAdventure');
     });
 
 });

@@ -25,6 +25,7 @@ class CreateAdventureAttendeesTable extends Migration
             $table->enum('application_status', ['not_reviewed', 'accepted', 'rejected'])->default('not_reviewed');
             $table->string('experience_with_games')->nullable();
             $table->string('message_to_creator')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

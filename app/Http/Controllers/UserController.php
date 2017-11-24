@@ -12,30 +12,9 @@ class UserController extends Controller
 {
     public function index() {
 
-        $userTypesCharacteristics = [
-            'userType' => array_combine(User::TYPES, User::TYPES),
-            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
-        ];
-
-        return view('account.account', $userTypesCharacteristics);
-    }
-
-    public function update(Request $request, $id)
-    {
-
-        $user = User::find($id);
-        $user->game = $request->get('game');
-        $user->availability = $request->get('availability');
-        $user->country = $request->get('country');
-        $user->city = $request->get('city');
-        $user->type = $request->get('type');
-        $user->save();
-
-        flash()->success('Succesfully updated your info!')->important();
-
-        return back();
 
     }
+
 
     public function showUserAdventures()
     {
@@ -44,6 +23,7 @@ class UserController extends Controller
         $adventures = Adventure::find($adventureIds);
 
         foreach($adventures as $adventure) {
+            $adventure->created_by_name = User::find($adventure->created_by)->name;
             $firstAttendeeThatIsDm = Adventure::find($adventure->id)->attendees()->where('is_dm', true)->first();
             if(isset($firstAttendeeThatIsDm)) {
                 $adventure->dungeon_master_name = User::find($firstAttendeeThatIsDm->user_id)->name;
@@ -60,5 +40,15 @@ class UserController extends Controller
         return view('account.adventures', $viewData);
     }
 
+    public function leaveAdventure($userId, $adventureId) {
+        $attendee = Adventure::find($adventureId)->attendees()->where('user_id', $userId);
+        $attendee->delete();
+        flash()
+            ->success(
+                'Succesfully left adventure!'
+            )
+            ->important();
 
+        return back();
+    }
 }

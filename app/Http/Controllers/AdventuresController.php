@@ -54,8 +54,6 @@ class AdventuresController
             $adventure->freeSlots = $adventure->max_nr_of_players - count(Adventure::find($adventure->id)->attendees()) + 1; //1 because we don't count the dm
         }
 
-//dd($cantJoinAdventures);
-
         $pageData = [
             'isCreatorOf' => $isCreatorOf,
             'cantJoinAdventures' => $cantJoinAdventures,
@@ -193,7 +191,12 @@ class AdventuresController
         $attendee->experience_with_games = $request->get('experience_with_games');
         $attendee->save();
 
-        return back();
+        flash()
+            ->success(
+                'Succesfully applied for adventure!'
+            )
+            ->important();
+        return redirect(url('/adventures'));
     }
 
     public function delete($adventureId){
@@ -219,21 +222,16 @@ class AdventuresController
 
         $adventure = Adventure::find($adventureId);
         $attendees = Adventure::find($adventureId)->attendees;
-        $users = [];
-        $userNames = [];
 
         foreach($attendees as $attendee) {
-            $users[] = AdventureAttendee::find($attendee->id)->user;
+
+            $attendee->name = AdventureAttendee::find($attendee->id)->user->name;
         }
 
-        foreach($users as $user) {
-            $userNames[] = $user->name;
-        }
 
         $viewData = [
             'adventure' => $adventure,
-            'attendees' => $attendees,
-            'attendeeNames' => $userNames,
+            'attendees' => $attendees
         ];
 
         return view('adventures.manage', $viewData);
@@ -256,8 +254,8 @@ class AdventuresController
     }
 
     public function changeAttendeeStatus($adventureId, $attendeeId, $status) {
-        $adventureAttendee = AdventureAttendee::find($attendeeId)->where('adventure_id', $adventureId)->get();
-        dd($adventureAttendee);
+
+        $adventureAttendee = AdventureAttendee::find($attendeeId);
         $adventureAttendee->application_status = $status;
         $adventureAttendee->save();
 
@@ -272,7 +270,7 @@ class AdventuresController
         $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_REJECTED);
         return back();
     }
-    public function resetAttendeeStatus($adventureId, $attendeeId) {
+    public function resetAttendee($adventureId, $attendeeId) {
         $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_NOT_REVIEWED);
         return back();
     }

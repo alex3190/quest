@@ -15,7 +15,7 @@
                 <td>#</td>
                 <td>Game type</td>
                 <td>Is there a DM?</td>
-                <td>Adventure initiator</td>
+                <td>Adventure creator</td>
                 <td>Free slots</td>
                 <td>Location</td>
                 <td>Created at</td>

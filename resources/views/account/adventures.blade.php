@@ -6,7 +6,7 @@
         <tr>
             <td>#</td>
             <td>Game type</td>
-            <td>Who's the DM?</td>
+            <td>Created by</td>
             {{--<td>Max number of players</td>--}}
             <td>Free slots</td>
             <td>Location</td>
@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{$adventure->id}}</td>
                     <td>{{$adventure->game_type}}</td>
-                    <td>{{$adventure->dungeon_master_name}}</td>
+                    <td>{{$adventure->created_by_name}}</td>
                     {{--<td>{{$adventure->max_nr_of_players}}</td>--}}
                     <td>{{$adventure->freeSlots}}</td>
                     <td>{{$adventure->city}}</td>
@@ -33,7 +33,9 @@
                             </td>
                             @else
                             <td>
-                                <a href="{{url('adventures/'.$adventure->id.'/unattend')}}" name="unattend" class="btn btn-sm btn-primary btn-block"> Leave adventure</a>
+                                {!! Form::open(['route' => ["account.leaveAdventure", \Illuminate\Support\Facades\Auth::user()->id , $adventure->id],  'method'=>"post"]) !!}
+                                {!! Form::submit('Leave adventure', ['class' =>'btn btn-sm btn-danger']) !!}
+                                {!! Form::close() !!}
                             </td>
                             @endif
                         </div>

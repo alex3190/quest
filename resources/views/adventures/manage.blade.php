@@ -49,120 +49,70 @@
     </div>
     <div class="container-fluid clearfix">
 
-        <a href="{{url('adventures/'.$adventure->id.'/confirmDelete')}}" name="delete" class="btn btn-sm btn-danger btn-block"> Delete Adventure</a>
-        <a href="{{url('adventures/'.$adventure->id.'/applications')}}" name="applications" class="btn btn-sm btn-default btn-block"> Manage adventure applications</a>
+        <a href="{{url('adventures/'.$adventure->id.'/confirmDelete')}}" name="delete"
+           class="btn btn-sm btn-danger btn-block"> Delete Adventure</a>
 
     </div>
 
-    <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">About the participants</div>
-            <div class="panel-body">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>Who participates?</th>
-                        @foreach($attendeeNames as $userName)
-                            <th>{{$userName}}</th>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Availability</th>
-                        @foreach($attendees as $attendee)
-                            <td>{{$attendee->availability}}</td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Can we play at this adventurer's residence?</th>
-                        @foreach($attendees as $attendee)
-                            @if($attendee->is_host)
-                                <td>Yes</td>
-                            @else
-                                <td>No</td>
-                            @endif
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Does this user have a preffered playing location?</th>
-                        @foreach($attendees as $attendee)
-                            <td>{{$attendee->place}}</td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Can he/she be dm?</th>
-                        @foreach($attendees as $attendee)
-                            @if($attendee->is_dm)
-                                <td>Yes</td>
-                            @else
-                                <td>No</td>
-                            @endif
-                        @endforeach
-                    </tr>
+    <div class="panel panel-default col-md-12">
+        <table class="table table-hover table-condensed table-inverse">
+            <thead>
+            <tr>
+                <td>Who participates</td>
+                <td>Availability</td>
+                <td>Can we play at this adventurer's residence?</td>
+                <td>Can he/she be dm?</td>
+                <td>Does this user have a prefferred playing location?</td>
+                <td>Beside his/her magnificent presence, what can he/she bring?</td>
+                <td>What other quests has he/she you embarked on before?</td>
+                <td>A message for the creator</td>
+                <td>Application status</td>
+            </tr>
+            </thead>
 
-                    <tr>
-                        <th>Beside his/her magnificent presence, what can he/she bring?</th>
-                        @foreach($attendees as $attendee)
-                            <td>{{$attendee->inventory}}</td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>What other quests has he/she you embarked on before?</th>
-                        @foreach($attendees as $attendee)
-                            <td>{{$attendee->experience_with_games}}</td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Application Status</th>
-                        @foreach($attendees as $attendee)
-                            <td>{{$attendee->application_status}}</td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <th>Application Actions</th>
-                        @foreach($attendees as $attendee)
-                            @if(\Illuminate\Support\Facades\Auth::user()->id == $attendee->user_id)
-                                <td>
-                                    N/A
-                                </td>
-                            @else
-                            @if($attendee->application_status == 'accepted')
+            <tbody>
+            <tr>
+                @foreach($attendees as $attendee)
+                    <td>{{$attendee->name}}</td>
+                    <td>{{$attendee->availability}}</td>
+                    <td>{{$attendee->is_host}}</td>
+                    <td>{{$attendee->is_dm}}</td>
+                    <td>{{$attendee->place}}</td>
+                    <td>{{$attendee->inventory}}</td>
+                    <td>{{$attendee->experience_with_games}}</td>
+                    <td>{{$attendee->message_to_creator}}</td>
+                    <td>{{$attendee->application_status}}</td>
+                    <td>
+                        @if(\Illuminate\Support\Facades\Auth::user()->id == $attendee->user_id)
 
-                                <td>
-                                    {!! Form::open(['route' => ["adventures.rejectApplicant", $adventure->id , $attendee->id],  'method'=>"post"]) !!}
-                                    {!! Form::submit('Uninvite', ['class' =>'btn btn-sm btn-danger']) !!}
-                                    {!! Form::close() !!}
-                                </td>
+                            This is you!!
 
-                            @endif
+                        @elseif($attendee->application_status == 'accepted')
 
-                            @if($attendee->application_status == 'not_reviewed')
+                            {!! Form::open(['route' => ["adventures.rejectApplicant", $adventure->id , $attendee->id],  'method'=>"post"]) !!}
+                            {!! Form::submit('Uninvite', ['class' =>'btn btn-sm btn-danger']) !!}
+                            {!! Form::close() !!}
 
-                                <td>
-                                    {!! Form::open(['route' => ["adventures.approveApplicant", $adventure->id , $attendee->id],  'method'=>"post"]) !!}
-                                    {!! Form::submit('Approve', ['class' =>'btn btn-sm btn-primary']) !!}
-                                    {!! Form::close() !!}
-                                    {!! Form::open(['route' => ["adventures.rejectApplicant",  $adventure->id , $attendee->id],  'method'=>"post"]) !!}
-                                    {!! Form::submit('Reject', ['class' =>'btn btn-sm btn-danger']) !!}
-                                    {!! Form::close() !!}
-                                </td>
+                        @elseif($attendee->application_status == 'not_reviewed')
 
-                            @endif
-                            @if($attendee->application_status == 'rejected')
+                            {!! Form::open(['route' => ["adventures.approveApplicant", $adventure->id , $attendee->id],  'method'=>"post"]) !!}
+                            {!! Form::submit('Approve', ['class' =>'btn btn-sm btn-primary']) !!}
+                            {!! Form::close() !!}
+                            {!! Form::open(['route' => ["adventures.rejectApplicant",  $adventure->id , $attendee->id],  'method'=>"post"]) !!}
+                            {!! Form::submit('Reject', ['class' =>'btn btn-sm btn-danger']) !!}
+                            {!! Form::close() !!}
 
-                                <td>
-                                    {!! Form::open(['route' => ["adventures.resetApplicant",  $attendee->id],  'method'=>"post"]) !!}
-                                    {!! Form::submit('I changed my mind', ['class' =>'btn btn-sm btn-primary']) !!}
-                                    {!! Form::close() !!}
-                                </td>
-
-                            @endif
-                            @endif
-                        @endforeach
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        @elseif($attendee->application_status == 'rejected')
+                            {!! Form::open(['route' => ["adventures.resetApplicant",  $adventure->id, $attendee->id],  'method'=>"post"]) !!}
+                            {!! Form::submit('I changed my mind', ['class' =>'btn btn-sm btn-primary']) !!}
+                            {!! Form::close() !!}
 
 
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

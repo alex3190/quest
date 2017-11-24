@@ -3,9 +3,11 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdventureAttendee extends Model
 {
+    use SoftDeletes;
     const APPLICATION_STATUS_NOT_REVIEWED = 'not_reviewed';
     const APPLICATION_STATUS_ACCEPTED = 'accepted';
     const APPLICATION_STATUS_REJECTED = 'rejected';
@@ -39,4 +41,10 @@ class AdventureAttendee extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

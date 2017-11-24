@@ -8,14 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    const TYPE_DM = 'dungeonMaster';
-    const TYPE_PLAYER = 'player';
-    const TYPE_VISITOR = 'visitor';
-    const TYPES = [
-        self::TYPE_DM,
-        self::TYPE_PLAYER,
-        self::TYPE_VISITOR
-    ];
 
     /**
      * The attributes that are mass assignable.
