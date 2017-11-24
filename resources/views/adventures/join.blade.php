@@ -77,7 +77,6 @@
                                     @endif
                                 @endforeach
                             </tr>
-
                             <tr>
                                 <th>Beside his/her magnificent presence, what can he/she bring?</th>
                                 @foreach($attendees as $attendee)
@@ -151,10 +150,6 @@
                     </div>
 
                 </div>
-
-
-
-
             </div>
         </div>
 @endsection

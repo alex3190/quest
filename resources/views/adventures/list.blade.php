@@ -35,9 +35,24 @@
                         <td>{{$adventure->created_at}}</td>
                         <div class="row">
                             <div class="col-md-4">
-                                <td>
-                                    <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm btn-primary btn-block"> Join Adventure</a>
-                                </td>
+
+                                @if(in_array($adventure->id, $isCreatorOf))
+                                    <td>
+                                        <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-primary btn-block"> Manage Adventure</a>
+                                    </td>
+                                @elseif(in_array($adventure->id, $cantJoinAdventures))
+                                    <td>
+                                        'Sorry, you already applied'
+                                    </td>
+                                @else
+                                    <td>
+                                        <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm btn-primary btn-block"> Join Adventure</a>
+
+                                    </td>
+                                @endif
+
+
+
                             </div>
                         </div>
                     </tr>

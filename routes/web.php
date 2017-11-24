@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function(){
         Route::patch('{id}/manage', 'AdventuresController@saveAdventure')->name('adventures.saveAdventure');
         Route::get('{id}/confirmDelete', 'AdventuresController@delete')->name('adventures.delete');
         Route::delete('{id}/confirmDelete', 'AdventuresController@confirmDelete')->name('adventures.confirmDelete');
+        Route::post('{id}/approveApplicant/{attendeeId}', 'AdventuresController@approveAttendee')->name('adventures.approveApplicant');
+        Route::post('{id}/rejectApplicant/{attendeeId}', 'AdventuresController@rejectAttendee')->name('adventures.rejectApplicant');
+        Route::post('{id}/resetApplicant/{attendeeId}', 'AdventuresController@resetAttendee')->name('adventures.resetApplicant');
     });
 
     Route::prefix('user')->group(function() {

@@ -26,11 +26,23 @@ class AdventuresController
     public function index() {
         $allAdventures = Adventure::orderBy('id', 'DESC')->paginate(10);
         $dmName = 'Not yet determined';
+        $cantJoinAdventures = [];
+        $isCreatorOf = [];
 
         //need to determine how a dm is selected. I just set the first guy that signs up as dm as a dm on said adv.
         //this also counts the nr of empty slots on each adventure in the list, not counting the party starter.
         //also gets creator name
         foreach($allAdventures as $adventure){
+            foreach($adventure->attendees as $attendee){
+                if(Auth::user()->id == $attendee->user_id){
+                    $cantJoinAdventures[] = $adventure->id;
+                }
+
+            }
+            if(Auth::user()->id == $adventure->created_by){
+                $isCreatorOf[] = $adventure->id;
+            }
+
             $firstAttendeeThatIsDm = Adventure::find($adventure->id)->attendees()->where('is_dm', true)->first();
             $adventure->dungeon_master_name = $dmName;
             $adventure->created_by_name = User::find($adventure->created_by)->name;
@@ -42,8 +54,11 @@ class AdventuresController
             $adventure->freeSlots = $adventure->max_nr_of_players - count(Adventure::find($adventure->id)->attendees()) + 1; //1 because we don't count the dm
         }
 
+//dd($cantJoinAdventures);
 
         $pageData = [
+            'isCreatorOf' => $isCreatorOf,
+            'cantJoinAdventures' => $cantJoinAdventures,
             'adventures' => $allAdventures,
             'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
         ];
@@ -118,7 +133,7 @@ class AdventuresController
      */
     public function joinExistingAdventure($adventureId){
         $adventure = Adventure::find($adventureId);
-        $attendees = Adventure::find($adventureId)->attendees;
+        $attendees = Adventure::find($adventureId)->attendees()->where('application_status', 'accepted')->get();
         $userNames = [];
         $dmOptions = [];
         $everyonesAvailability = [];
@@ -237,6 +252,28 @@ class AdventuresController
         $adventure->max_nr_of_players = $request->get('max_nr_of_players');
         $adventure->save();
 
+        return back();
+    }
+
+    public function changeAttendeeStatus($adventureId, $attendeeId, $status) {
+        $adventureAttendee = AdventureAttendee::find($attendeeId)->where('adventure_id', $adventureId)->get();
+        dd($adventureAttendee);
+        $adventureAttendee->application_status = $status;
+        $adventureAttendee->save();
+
+        return back();
+    }
+
+    public function approveAttendee($adventureId, $attendeeId) {
+        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_ACCEPTED);
+        return back();
+    }
+    public function rejectAttendee($adventureId, $attendeeId) {
+        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_REJECTED);
+        return back();
+    }
+    public function resetAttendeeStatus($adventureId, $attendeeId) {
+        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_NOT_REVIEWED);
         return back();
     }
 }
