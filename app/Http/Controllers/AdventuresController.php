@@ -45,7 +45,6 @@ class AdventuresController
 
         $pageData = [
             'adventures' => $allAdventures,
-            'adventureStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
             'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
         ];
 
@@ -60,7 +59,6 @@ class AdventuresController
      */
     public function createNewAdventure(){
         $pageData = [
-            'adventureStatuses' => array_combine(Adventure::STATUSES, Adventure::STATUSES),
             'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
             'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
@@ -79,7 +77,6 @@ class AdventuresController
         $userId = Auth::user()->id;
         $adventure = new Adventure();
         //save stuff on adventure
-        $adventure->status = Adventure::STATUS_NEW;
         $adventure->city = $request->get('city');
         $adventure->game_type = $request->get('game_type');
         $adventure->created_by = $userId;
@@ -92,8 +89,11 @@ class AdventuresController
         $attendee->user_id = $userId;
         $attendee->is_host = $request->get('is_host');
         $attendee->is_dm = $request->get('is_dm');
+        (!isset($attendee->is_host)) ? $attendee->is_host = false : $attendee->is_host = true;
+        (!isset($attendee->is_dm)) ? $attendee->is_dm = false : $attendee->is_dm = true;
         $attendee->place = $request->get('place');
         $attendee->inventory = $request->get('inventory');
+        $attendee->application_status = AdventureAttendee::APPLICATION_STATUS_ACCEPTED;
         $attendee->experience_with_games = $request->get('experience_with_games');
         $attendee->availability = $request->get('availability');
         $attendee->adventure_id = $adventure->id;
@@ -104,8 +104,8 @@ class AdventuresController
         //success message
         flash()
             ->success(
-            'Succesfully created adventure #' . $adventure->id .
-            ". You can now view it in the adventure list by clicking" ."<a href='/adventures'> here </a>" . "or administrating it from" ."<a href=$myAccountAdventureLink> your acocunt </a>")
+                'Succesfully created adventure #' . $adventure->id .
+                ". You can now view it in the adventure list by clicking" ."<a href='/adventures'> here </a>" . "or administrating it from" ."<a href=$myAccountAdventureLink> your acocunt </a>")
             ->important();
         return back();
     }
@@ -166,13 +166,15 @@ class AdventuresController
         $attendee = new AdventureAttendee();
         $userId = Auth::user()->id;
         $attendee->user_id = $userId;
-
         $attendee->is_host = $request->get('is_host');
         $attendee->is_dm = $request->get('is_dm');
+        (!isset($attendee->is_host)) ? $attendee->is_host = false : $attendee->is_host = true;
+        (!isset($attendee->is_dm)) ? $attendee->is_dm = false : $attendee->is_dm = true;
         $attendee->adventure_id = $adventureId;
         $attendee->place = $request->get('place');
         $attendee->inventory = $request->get('inventory');
         $attendee->availability = $request->get('availability');
+        $attendee->message_to_creator = $request->get('message_to_creator');
         $attendee->experience_with_games = $request->get('experience_with_games');
         $attendee->save();
 
@@ -180,6 +182,14 @@ class AdventuresController
     }
 
     public function delete($adventureId){
+        $adventure = Adventure::find($adventureId);
+        $data = [
+            'adventure' => $adventure
+        ];
+        return view('adventures.confirmDelete', $data);
+    }
+
+    public function confirmDelete($adventureId){
         $adventure = Adventure::find($adventureId);
         $adventure->delete();
         flash()
@@ -209,12 +219,24 @@ class AdventuresController
             'adventure' => $adventure,
             'attendees' => $attendees,
             'attendeeNames' => $userNames,
-
         ];
 
         return view('adventures.manage', $viewData);
-
     }
 
+    public function saveAdventure(Request $request, $adventureId) {
+        $adventure = Adventure::find($adventureId);
+//        $selectedCreator = User::where('name', $request->get('created_by'))->first();
+//        dd($selectedCreator);
+//changing creator postponed
 
+        //@todo fix bug where default selected is incorrect
+        $adventure->game_type = strtolower($request->get('game_type'));
+//        $adventure->created_by = $selectedCreator->id;
+        $adventure->city = $request->get('city');
+        $adventure->max_nr_of_players = $request->get('max_nr_of_players');
+        $adventure->save();
+
+        return back();
+    }
 }

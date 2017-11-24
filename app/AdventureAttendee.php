@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdventureAttendee extends Model
 {
+    const APPLICATION_STATUS_NOT_REVIEWED = 'not_reviewed';
+    const APPLICATION_STATUS_ACCEPTED = 'accepted';
+    const APPLICATION_STATUS_REJECTED = 'rejected';
 
+    const APPLICATION_STATUSES = [
+        self::APPLICATION_STATUS_ACCEPTED,
+        self::APPLICATION_STATUS_REJECTED,
+        self::APPLICATION_STATUS_NOT_REVIEWED
+    ];
     const AVAIL_ANYTIME = 'anytime';
     const AVAIL_WEEKEND = 'weekend';
     const AVAIL_WEEKDAY = 'weekdays';
@@ -19,11 +27,6 @@ class AdventureAttendee extends Model
         self::AVAIL_WEEKNIGHT,
         self::AVAIL_WEEKDAY,
         self::AVAIL_NEVER
-    ];
-
-    public $casts = [
-        'is_dm' => 'boolean',
-        'is_host' => 'boolean',
     ];
 
     public function adventures()

@@ -14,8 +14,6 @@
             $("#show").click(function(){
                 $("div#allFilters").show();
                 $("a#show").hide();
-
-
             });
         });
     </script>
@@ -27,31 +25,25 @@
                         <li><a href="#" data-group="all" class="active">All</a></li>
                         @for($i=0; $i<=11; $i++)
                             @if(isset($uniqueTags[$i]))
-                            <li><a href="#" data-group="{{$uniqueTags[$i]}}">{{$uniqueTags[$i]}}</a></li>
+                                <li><a href="#" data-group="{{$uniqueTags[$i]}}">{{$uniqueTags[$i]}}</a></li>
                             @endif
                         @endfor
                         <a href="#" id="show"> See all filters... </a>
-                    </ul> <!--end portfolio sorting -->
+                    </ul>
                 </div>
                 <div id="allFilters" style="display:none">
                     <ul class="portfolio-sorting list-inline text-center">
                         {{end($uniqueTags)}}
                         @for($i=12; $i<=key($uniqueTags); $i++)
                             @if(isset($uniqueTags[$i]))
-                            <li><a href="#" data-group="{{$uniqueTags[$i]}}">{{$uniqueTags[$i]}}</a></li>
+                                <li><a href="#" data-group="{{$uniqueTags[$i]}}">{{$uniqueTags[$i]}}</a></li>
                             @endif
                         @endfor
                         <a href="#" id="hide"> Hide filters... </a>
-                    </ul> <!--end portfolio sorting -->
-
+                    </ul>
                 </div>
-
-
-
-
                 <ul class="portfolio-items list-unstyled" id="grid">
                     @for($i = 0; $i < count($tags); $i ++)
-                        {{--{{dd($tags[$i])}}--}}
                         <li class="col-md-4 col-sm-4 col-xs-6" data-groups='{{"[" . $tags[$i] . "]"}}'>
                             <figure class="portfolio-item picture-item__title">
                                 <a href="{{$csv[$i][1]}}">
@@ -61,10 +53,8 @@
                             </figure>
                     @endfor
                     <li class="col-md-4 col-sm-4 col-xs-6 shuffle_sizer"></li>
-                </ul> <!--end portfolio grid -->
-            </div> <!--end row -->
-        </div> <!-- end container-->
+                </ul>
+            </div>
+        </div>
     </section>
-
-
 @endsection

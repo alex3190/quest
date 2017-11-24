@@ -3,14 +3,29 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-body {
+.body {
     padding-top: 50px;
     padding-left: 180px;
     padding-right: 180px;
+    padding-bottom: 180px;
+    margin-bottom: 180px;
     /*background: #000000 url("paper2.jpg");*/
     background-size: cover;
     background-repeat:   no-repeat;
     /*background-position: center;*/
+}
+
+footer.custom{
+    padding-top: 40px;
+}
+
+table.custom{
+    padding-bottom: 50px;
+}
+
+@media (max-height:800px){
+    footer { position: static; }
+    header { padding-top:40px; }
 }
 .navbar{
     background-color:black;

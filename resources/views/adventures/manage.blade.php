@@ -12,7 +12,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Edit the adventure details</div>
                     <div class="panel-body">
-                        {!! Form::open(['route' =>['adventures.manage', $adventure->id], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
+                        {!! Form::open(['route' =>['adventures.saveAdventure', $adventure->id], 'method' => 'patch', 'class' =>"form-horizontal"]) !!}
 
                         <div class="form-group">
                             {!! Form::label('game_type', 'Change the type of the game to be played', ['class' => 'col-md-5 col-lg-5']) !!}
@@ -20,18 +20,13 @@
                                 {!! Form::select('game_type', \App\Adventure::GAMES, $adventure->game_type, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'game_type']) !!}
                             </div>
                         </div>
-                        <div class="form-group">
-                            {!! Form::label('host_id', 'Who will host the adventure?', ['class' => 'col-md-5 col-lg-5']) !!}
-                            <div class="col-md-7 col-lg-7">
-                                {!! Form::select('host_id', $attendeeNames, '', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'host_id']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('dungeon_master', 'Who will dm the adventure?', ['class' => 'col-md-5 col-lg-5']) !!}
-                            <div class="col-md-7 col-lg-7">
-                                {!! Form::select('dungeon_master', $attendeeNames, '', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'dungeon_master']) !!}
-                            </div>
-                        </div>
+                        {{--i don't feel like doing this shit now. creator changing postponed--}}
+                        {{--<div class="form-group">--}}
+                            {{--{!! Form::label('created_by', 'Change the adventure owner (WARNING you will lose your administrative rights!', ['class' => 'col-md-5 col-lg-5']) !!}--}}
+                            {{--<div class="col-md-7 col-lg-7">--}}
+                                {{--{!! Form::select('created_by', $attendeeNames, '', ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value' =>'created_by']) !!}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             {!! Form::label('city', 'In which city will you play?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
@@ -52,9 +47,11 @@
                     </div>
 
                 </div>
+    <div class="container-fluid clearfix">
 
-    {!! Form::open(['route' =>['adventures.getDelete', $adventure->id], 'method' => 'get', 'class' =>"form-horizontal"]) !!}
+        <a href="{{url('adventures/'.$adventure->id.'/confirmDelete')}}" name="delete" class="btn btn-sm btn-danger btn-block"> Delete Adventure</a>
+        <a href="{{url('adventures/'.$adventure->id.'/applications')}}" name="applications" class="btn btn-sm btn-default btn-block"> Manage adventure applications</a>
 
-    {!! Form::close() !!}
-    {{--delete the adventure--}}
+    </div>
+
 @endsection

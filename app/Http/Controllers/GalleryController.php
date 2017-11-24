@@ -23,12 +23,10 @@ class GalleryController
                     $images[] = '"' . strtolower($image[$i]) . '"';
                     $allTags[] = strtolower($image[$i]);
                 }
-
             }
             $finalItems[] = implode(', ', $images);
 
         }
-
 
         $csv = [
             'csv'=> $parsedCsv,
@@ -36,7 +34,6 @@ class GalleryController
             'uniqueTags' => array_unique($allTags)
         ];
 
-//        dd($csv['uniqueTags']);
         return view('gallery.gallery', $csv);
     }
 }

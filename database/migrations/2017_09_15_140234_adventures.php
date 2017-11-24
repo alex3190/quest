@@ -19,6 +19,7 @@ class Adventures extends Migration
             $table->integer('max_nr_of_players')->nullable();
             $table->string('city')->nullable();
             $table->integer('created_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
         });

@@ -9,7 +9,7 @@
     </div>
     <div class="panel panel-default col-md-12">
 
-        <table class="table table-hover table-condensed table-inverse">
+        <table class="table table-hover table-condensed table-inverse custom">
             <thead>
             <tr>
                 <td>#</td>

@@ -10,19 +10,11 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Adventure extends Model
 {
-    const STATUS_NEW = 'new';
-    const STATUS_PLANNED = 'planned';
-    const STATUS_OCCURRED = 'occurred';
-
-    const STATUSES = [
-        self::STATUS_NEW,
-        self::STATUS_PLANNED,
-        self::STATUS_OCCURRED
-    ];
-
+    use SoftDeletes;
     const GAME_DND_PATHFINDER = 'pathfinder';
     const GAME_DND_5E = 'dnd5e';
     const GAME_NUMENERA = 'numenera';
@@ -43,4 +35,12 @@ class Adventure extends Model
         return $this->hasMany('App\AdventureAttendee', 'adventure_id', 'id');
     }
 
+
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

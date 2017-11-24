@@ -102,15 +102,15 @@
                         {!! Form::open(['route' =>['adventures.join', $adventure->id], 'method' => 'post', 'class' =>"form-horizontal"]) !!}
 
                         <div class="form-group">
-                            {!! Form::label('dungeon_master', 'Would you like to be the game master?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('is_dm', 'Would you like to be the game master?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::checkbox('dungeon_master', 'yes', '') !!}
+                                {!! Form::checkbox('is_dm', false, false) !!}
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('host_of_adventure', 'Can the group play at your place?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            {!! Form::label('is_host', 'Can the group play at your place?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
-                                {!! Form::checkbox('host_of_adventure', 'yes', '') !!}
+                                {!! Form::checkbox('is_host', false, false) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -129,6 +129,12 @@
                             {!! Form::label('experience_with_games', 'What other quests have you embarked on?', ['class' => 'col-md-5 col-lg-5']) !!}
                             <div class="col-md-7 col-lg-7">
                                 {!! Form::text('experience_with_games', '', ['placeholder' => 'What games, for how long?', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('message_to_creator', 'Do you have a message to the group\'s creator?', ['class' => 'col-md-5 col-lg-5']) !!}
+                            <div class="col-md-7 col-lg-7">
+                                {!! Form::text('message_to_creator', '', ['placeholder' => 'What would you like to say?', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
