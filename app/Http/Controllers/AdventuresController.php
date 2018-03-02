@@ -51,7 +51,7 @@ class AdventuresController
                 $dmName = User::find($firstAttendeeThatIsDm->user_id)->name;
             }
 
-            $adventure->freeSlots = $adventure->max_nr_of_players - count(Adventure::find($adventure->id)->attendees()) + 1; //1 because we don't count the dm
+            $adventure->freeSlots = $adventure->max_nr_of_players - count([Adventure::find($adventure->id)->attendees()]) + 1; //1 because we don't count the dm
         }
 
         $pageData = [

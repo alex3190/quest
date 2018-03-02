@@ -30,7 +30,7 @@ class UserController extends Controller
             } else {
                 $adventure->dungeon_master_name = 'No DM signed up yet!';
             }
-            $adventure->freeSlots = $adventure->max_nr_of_players - count(Adventure::find($adventure->id)->attendees()) +1; //1 because we don't count the dm
+            $adventure->freeSlots = $adventure->max_nr_of_players - count([Adventure::find($adventure->id)->attendees()]) +1; //1 because we don't count the dm
         }
 
         $viewData = [
