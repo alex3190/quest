@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Adventure;
 use App\AdventureAttendee;
 use App\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,8 @@ class AdventuresController
      *
      * Base method of Adventures, used to get all adventures
      */
-    public function index() {
+    public function index()
+    {
         $allAdventures = Adventure::orderBy('id', 'DESC')->paginate(10);
         $dmName = 'Not yet determined';
         $cantJoinAdventures = [];
@@ -51,7 +53,7 @@ class AdventuresController
                 $dmName = User::find($firstAttendeeThatIsDm->user_id)->name;
             }
 
-            $adventure->freeSlots = $adventure->max_nr_of_players - count([Adventure::find($adventure->id)->attendees()]) + 1; //1 because we don't count the dm
+            $adventure->freeSlots = $adventure->max_nr_of_players - Adventure::find($adventure->id)->attendees()->count() + 1; //1 because we don't count the dm
         }
 
         $pageData = [
