@@ -132,6 +132,8 @@ class AdventuresController
      * renders the join adventure view, that also allows users to see data about the adveture.
      */
     public function joinExistingAdventure($adventureId){
+
+
         $adventure = Adventure::find($adventureId);
         $attendees = Adventure::find($adventureId)->attendees()->where('application_status', 'accepted')->get();
         $userNames = [];
@@ -139,6 +141,8 @@ class AdventuresController
         $everyonesAvailability = [];
         $experienceWithGames = [];
         $isHost = [];
+        $attendeesIDs = [];
+
 
         foreach($attendees as $attendee){
             $userId = $attendee->user_id;
@@ -149,7 +153,11 @@ class AdventuresController
             $isHost[] = $attendee->is_host;
             $experienceWithGames[] = $attendee->experience_with_games;
             $everyonesAvailability[] = $attendee->availability;
+            $attendeesIDs[] = $attendee->id;
         }
+
+
+
 
         //calculate how many players are needed
         $nrOfRemainingSpots = $adventure->max_nr_of_players - $attendees->count() +1; // +1 because we don't count the dm
@@ -165,8 +173,12 @@ class AdventuresController
             'experienceWithGames' => $experienceWithGames,
             'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
+        if ($this->validateJoin($adventure->created_by, $attendeesIDs) == false) {
+            return redirect('/adventures');
+        } else {
+            return view('adventures.join', $pageData);
+        }
 
-        return view('adventures.join', $pageData);
     }
 
     /**
@@ -177,6 +189,7 @@ class AdventuresController
      * logic for the form on the join adventure page
      */
     public function confirmJoinExistingAdventure(Request $request, $adventureId){
+
 
         $attendee = new AdventureAttendee();
         $userId = Auth::id();
@@ -275,5 +288,13 @@ class AdventuresController
     public function resetAttendee($adventureId, $attendeeId) {
         $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_NOT_REVIEWED);
         return back();
+    }
+
+    public function validateJoin(int $creatorId, array $participantIds) {
+        if(Auth::id() == $creatorId || in_array(Auth::id(), $participantIds)) {
+            return false;
+        }else {
+            return true;
+        }
     }
 }
