@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function showUserAdventures()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
         $adventureIds = User::find($userId)->attendees()->get(['adventure_id']);
         $adventures = Adventure::find($adventureIds);
 

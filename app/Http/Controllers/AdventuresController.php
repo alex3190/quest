@@ -36,12 +36,12 @@ class AdventuresController
         //also gets creator name
         foreach($allAdventures as $adventure){
             foreach($adventure->attendees as $attendee){
-                if(Auth::user()->id == $attendee->user_id){
+                if(Auth::id() == $attendee->user_id){
                     $cantJoinAdventures[] = $adventure->id;
                 }
 
             }
-            if(Auth::user()->id == $adventure->created_by){
+            if(Auth::id() == $adventure->created_by){
                 $isCreatorOf[] = $adventure->id;
             }
 
@@ -89,7 +89,7 @@ class AdventuresController
      */
     public function saveNewAdventure(Request $request)
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
         $adventure = new Adventure();
         //save stuff on adventure
         $adventure->city = $request->get('city');
@@ -179,7 +179,7 @@ class AdventuresController
     public function confirmJoinExistingAdventure(Request $request, $adventureId){
 
         $attendee = new AdventureAttendee();
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
         $attendee->user_id = $userId;
         $attendee->is_host = $request->get('is_host');
         $attendee->is_dm = $request->get('is_dm');
