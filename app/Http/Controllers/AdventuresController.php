@@ -26,10 +26,10 @@ class AdventuresController
      */
     public function index()
     {
-        $allAdventures = Adventure::orderBy('id', 'DESC')->paginate(10);
-        $dmName = 'Not yet determined';
+        $allAdventures      = Adventure::orderBy('id', 'DESC')->paginate(10);
+        $dmName             = 'Not yet determined';
         $cantJoinAdventures = [];
-        $isCreatorOf = [];
+        $isCreatorOf        = [];
 
         //need to determine how a dm is selected. I just set the first guy that signs up as dm as a dm on said adv.
         //this also counts the nr of empty slots on each adventure in the list, not counting the party starter.
@@ -39,28 +39,27 @@ class AdventuresController
                 if(Auth::id() == $attendee->user_id){
                     $cantJoinAdventures[] = $adventure->id;
                 }
-
             }
             if(Auth::id() == $adventure->created_by){
                 $isCreatorOf[] = $adventure->id;
             }
 
-            $firstAttendeeThatIsDm = Adventure::find($adventure->id)->attendees()->where('is_dm', true)->first();
-            $adventure->dungeon_master_name = $dmName;
-            $adventure->created_by_name = User::find($adventure->created_by)->name;
+            $firstAttendeeThatIsDm              = Adventure::find($adventure->id)->attendees()->where('is_dm', true)->first();
+            $adventure->dungeon_master_name     = $dmName;
+            $adventure->created_by_name         = User::find($adventure->created_by)->name;
             if(isset($firstAttendeeThatIsDm)) {
                 $adventure->dungeon_master_name = $dmName;
-                $dmName = User::find($firstAttendeeThatIsDm->user_id)->name;
+                $dmName                         = User::find($firstAttendeeThatIsDm->user_id)->name;
             }
 
             $adventure->freeSlots = $adventure->max_nr_of_players - Adventure::find($adventure->id)->attendees()->count() + 1; //1 because we don't count the dm
         }
 
         $pageData = [
-            'isCreatorOf' => $isCreatorOf,
+            'isCreatorOf'        => $isCreatorOf,
             'cantJoinAdventures' => $cantJoinAdventures,
-            'adventures' => $allAdventures,
-            'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
+            'adventures'         => $allAdventures,
+            'gameTypes'          => array_combine(Adventure::GAMES, Adventure::GAMES),
         ];
 
         return view('adventures.list', $pageData);
@@ -74,8 +73,8 @@ class AdventuresController
      */
     public function createNewAdventure(){
         $pageData = [
-            'gameTypes' => array_combine(Adventure::GAMES, Adventure::GAMES),
-            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
+            'gameTypes'     => array_combine(Adventure::GAMES, Adventure::GAMES),
+            'availability'  => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
 
         return view('adventures.create', $pageData);
@@ -89,34 +88,33 @@ class AdventuresController
      */
     public function saveNewAdventure(Request $request)
     {
-        $userId = Auth::id();
+        $userId    = Auth::id();
         $adventure = new Adventure();
+
         //save stuff on adventure
-        $adventure->city = $request->get('city');
-        $adventure->game_type = $request->get('game_type');
-        $adventure->created_by = $userId;
-        $adventure->max_nr_of_players = $request->get('max_nr_of_players');
+        $adventure->city                = $request->get('city');
+        $adventure->game_type           = $request->get('game_type');
+        $adventure->created_by          = $userId;
+        $adventure->max_nr_of_players   = $request->get('max_nr_of_players');
         $adventure->save();
 
         //save on attendee
-        $attendee = new AdventureAttendee();
-        //save on attendee
-        $attendee->user_id = $userId;
-        $attendee->is_host = $request->get('is_host');
-        $attendee->is_dm = $request->get('is_dm');
-        (!isset($attendee->is_host)) ? $attendee->is_host = false : $attendee->is_host = true;
-        (!isset($attendee->is_dm)) ? $attendee->is_dm = false : $attendee->is_dm = true;
-        $attendee->place = $request->get('place');
-        $attendee->inventory = $request->get('inventory');
-        $attendee->application_status = AdventureAttendee::APPLICATION_STATUS_ACCEPTED;
-        $attendee->experience_with_games = $request->get('experience_with_games');
-        $attendee->availability = $request->get('availability');
-        $attendee->adventure_id = $adventure->id;
+        $attendee                           = new AdventureAttendee();
+        $attendee->user_id                  = $userId;
+        $attendee->is_host                  = $request->get('is_host');
+        $attendee->is_dm                    = $request->get('is_dm');
+        $attendee->place                    = $request->get('place');
+        $attendee->inventory                = $request->get('inventory');
+        $attendee->application_status       = AdventureAttendee::APPLICATION_STATUS_ACCEPTED;
+        $attendee->experience_with_games    = $request->get('experience_with_games');
+        $attendee->availability             = $request->get('availability');
+        $attendee->adventure_id             = $adventure->id;
+        (!isset($attendee->is_host)) ? $attendee->is_host   = false : $attendee->is_host = true;
+        (!isset($attendee->is_dm))   ? $attendee->is_dm     = false : $attendee->is_dm   = true;
         $attendee->save();
 
-
-        $myAccountAdventureLink = '/adventures/' . $adventure->id . '/manage';
         //success message
+        $myAccountAdventureLink = '/adventures/' . $adventure->id . '/manage';
         flash()
             ->success(
                 'Succesfully created adventure #' . $adventure->id .
@@ -133,27 +131,26 @@ class AdventuresController
      */
     public function joinExistingAdventure($adventureId){
 
-
-        $adventure = Adventure::find($adventureId);
-        $attendees = Adventure::find($adventureId)->attendees()->where('application_status', 'accepted')->get();
-        $userNames = [];
-        $dmOptions = [];
-        $everyonesAvailability = [];
-        $experienceWithGames = [];
-        $isHost = [];
-        $attendeesIDs = [];
+        $adventure              = Adventure::find($adventureId);
+        $attendees              = Adventure::find($adventureId)->attendees()->where('application_status', 'accepted')->get();
+        $userNames              = [];
+        $dmOptions              = [];
+        $everyonesAvailability  = [];
+        $experienceWithGames    = [];
+        $isHost                 = [];
+        $attendeesIDs           = [];
 
 
         foreach($attendees as $attendee){
             $userId = $attendee->user_id;
 
-            $user = User::find($userId);
-            $userNames[] = $user->name;
-            $dmOptions[] = $attendee->is_dm;
-            $isHost[] = $attendee->is_host;
-            $experienceWithGames[] = $attendee->experience_with_games;
-            $everyonesAvailability[] = $attendee->availability;
-            $attendeesIDs[] = $attendee->id;
+            $user                       = User::find($userId);
+            $userNames[]                = $user->name;
+            $dmOptions[]                = $attendee->is_dm;
+            $isHost[]                   = $attendee->is_host;
+            $experienceWithGames[]      = $attendee->experience_with_games;
+            $everyonesAvailability[]    = $attendee->availability;
+            $attendeesIDs[]             = $attendee->id;
         }
 
 
@@ -163,17 +160,22 @@ class AdventuresController
         $nrOfRemainingSpots = $adventure->max_nr_of_players - $attendees->count() +1; // +1 because we don't count the dm
 
         $pageData = [
-            'adventure' => $adventure,
-            'attendees' => $attendees,
-            'userNames' => $userNames,
-            'dmOptions' => $dmOptions,
-            'isHost' => $isHost,
-            'availabilities' => $everyonesAvailability,
-            'spotsLeft' => $nrOfRemainingSpots,
-            'experienceWithGames' => $experienceWithGames,
-            'availability' => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
+            'adventure'             => $adventure,
+            'attendees'             => $attendees,
+            'userNames'             => $userNames,
+            'dmOptions'             => $dmOptions,
+            'isHost'                => $isHost,
+            'availabilities'        => $everyonesAvailability,
+            'spotsLeft'             => $nrOfRemainingSpots,
+            'experienceWithGames'   => $experienceWithGames,
+            'availability'          => array_combine(AdventureAttendee::AVAILABILITY, AdventureAttendee::AVAILABILITY),
         ];
         if ($this->validateJoin($adventure->created_by, $attendeesIDs) == false) {
+            flash()
+                ->success(
+                    'You have already signed up for that adventure!'
+                )
+                ->important();
             return redirect('/adventures');
         } else {
             return view('adventures.join', $pageData);
@@ -191,19 +193,19 @@ class AdventuresController
     public function confirmJoinExistingAdventure(Request $request, $adventureId){
 
 
-        $attendee = new AdventureAttendee();
-        $userId = Auth::id();
-        $attendee->user_id = $userId;
-        $attendee->is_host = $request->get('is_host');
-        $attendee->is_dm = $request->get('is_dm');
+        $attendee                           = new AdventureAttendee();
+        $userId                             = Auth::id();
+        $attendee->user_id                  = $userId;
+        $attendee->is_host                  = $request->get('is_host');
+        $attendee->is_dm                    = $request->get('is_dm');
+        $attendee->adventure_id             = $adventureId;
+        $attendee->place                    = $request->get('place');
+        $attendee->inventory                = $request->get('inventory');
+        $attendee->availability             = $request->get('availability');
+        $attendee->message_to_creator       = $request->get('message_to_creator');
+        $attendee->experience_with_games    = $request->get('experience_with_games');
         (!isset($attendee->is_host)) ? $attendee->is_host = false : $attendee->is_host = true;
-        (!isset($attendee->is_dm)) ? $attendee->is_dm = false : $attendee->is_dm = true;
-        $attendee->adventure_id = $adventureId;
-        $attendee->place = $request->get('place');
-        $attendee->inventory = $request->get('inventory');
-        $attendee->availability = $request->get('availability');
-        $attendee->message_to_creator = $request->get('message_to_creator');
-        $attendee->experience_with_games = $request->get('experience_with_games');
+        (!isset($attendee->is_dm))   ? $attendee->is_dm   = false : $attendee->is_dm   = true;
         $attendee->save();
 
         flash()
@@ -215,8 +217,8 @@ class AdventuresController
     }
 
     public function delete($adventureId){
-        $adventure = Adventure::find($adventureId);
-        $data = [
+        $adventure  = Adventure::find($adventureId);
+        $data       = [
             'adventure' => $adventure
         ];
         return view('adventures.confirmDelete', $data);
@@ -259,15 +261,17 @@ class AdventuresController
 //changing creator postponed
 
         //@todo fix bug where default selected is incorrect
-        $adventure->game_type = strtolower($request->get('game_type'));
-//        $adventure->created_by = $selectedCreator->id;
-        $adventure->city = $request->get('city');
-        $adventure->max_nr_of_players = $request->get('max_nr_of_players');
+        $adventure->game_type           = strtolower($request->get('game_type'));
+        $adventure->city                = $request->get('city');
+        $adventure->max_nr_of_players   = $request->get('max_nr_of_players');
         $adventure->save();
 
         return back();
     }
 
+    /**
+     * Do NOT remove $adventureId
+     */
     public function changeAttendeeStatus($adventureId, $attendeeId, $status) {
 
         $adventureAttendee = AdventureAttendee::find($attendeeId);
@@ -293,7 +297,7 @@ class AdventuresController
     public function validateJoin(int $creatorId, array $participantIds) {
         if(Auth::id() == $creatorId || in_array(Auth::id(), $participantIds)) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
