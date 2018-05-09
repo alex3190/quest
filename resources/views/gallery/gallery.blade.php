@@ -1,12 +1,23 @@
 @extends('navigation')
 @section('content')
 
-    <div class="row-fluid">
-        <div class="form-group row">
-            <div class="col-xs-5"><strong>Are you searching for something specific? Type in here</strong><input class="filter__search js-shuffle-search form-control" type="search" placeholder="Search for something specific..." />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-group">
+                <strong>Are you searching for something specific? </strong>
+            </div>
+            <div class="col-md-4"></div>
         </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-group">
+                <input class="filter__search js-shuffle-search form-control" type="search" placeholder="Search for something specific..." />
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
+
     <script>
         $(document).ready(function(){
             $("#hide").click(function(){
