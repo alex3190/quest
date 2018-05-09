@@ -9,8 +9,8 @@
     padding-right: 180px;
     padding-bottom: 180px;
     margin-bottom: 180px;
-    /*background: #000000 url("paper2.jpg");*/
-    background-size: cover;
+    background: #000000 url("background3.jpg");
+    background-size: 100%;
     background-repeat:   no-repeat;
     /*background-position: center;*/
 }
