@@ -35,9 +35,6 @@
         <div class="container">
             <!-- left nav top -->
             <ul class="nav navbar-nav pull-left">
-                {{--<li><a href="#"><span class="glyphicon glyphicon-thumbs-up text-white"></span></a></li>--}}
-                {{--<li><a href="#"><span class="glyphicon glyphicon-globe text-white"></span></a></li>--}}
-                {{--<li><a href="#"><span class="glyphicon glyphicon-pushpin text-white"></span></a></li>--}}
                 <li><a href="#"><span class="text-white">Welcome Home, traveler! </span></a></li>
                 <li><a href="{{url('/adventures')}}"><span class="text-white"><strong>Start a new adventure?</strong></span></a></li>
                 @if($isLoggedIn)
@@ -110,48 +107,51 @@
         <script src="{{ asset('js/shuffle_additional.js') }}"></script>
 
         <div class="footer-left">
-            <h3>A<span> quest</span> to remember</h3>
+            <p>Created By...</p>
+            <h2>A bunch of nerds
+                <br>with too much spare time</h2>
             <p class="footer-links">
-                <a href="#">About Us</a>
+                <a href="{{url('/about')}}">About Us</a>
                 ·
-                <a href="#">Adventures</a>
+                <a href="{{url('/adventures')}}">Adventures</a>
                 ·
-                <a href="#">Gallery</a>
+                <a href="{{url('/gallery')}}">Gallery</a>
                 ·
                 <a href="#">News</a>
                 ·
-                <a href="#">Contact</a>
+                <a href="{{url('/about')}}">Contact</a>
             </p>
-            <p class="footer-company-name">A Quest To Remember</p>
         </div>
         <div class="footer-center">
             <div>
                 <i class="fa fa-map-marker"></i>
-                <p><span>Street address</span> Bucharest</p>
+                <p><span>Where do we live?</span> You don't want to know</p>
             </div>
-            <div>
-                <i class="fa fa-phone"></i>
-                <p>+00000</p>
-            </div>
+            <br>
+            <br>
+            <br>
             <div>
                 <i class="fa fa-envelope"></i>
-                <p><a href="mailto:alexandra.bulearca@gmail.com">alexandra.bulearca@gmail.com</a></p>
+                <p>
+                    You can contact us at this address:
+                    <br>
+                    <a href="mailto:alexandra.bulearca@gmail.com">alexandra.bulearca@gmail.com</a></p>
             </div>
         </div>
 
         <div class="footer-right">
 
             <p class="footer-company-about">
-                <span>What?</span>
+                <span>A bit of wisdom before you leave...</span>
                 You are the storyteller and story, the ink and the writer, the play and the audience, the master and the slayer of dragons.
             </p>
-            <div class="footer-icons">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
+            {{--<div class="footer-icons">--}}
+                {{--<a href="#"><i class="fa fa-facebook"></i></a>--}}
+                {{--<a href="#"><i class="fa fa-twitter"></i></a>--}}
+                {{--<a href="#"><i class="fa fa-linkedin"></i></a>--}}
+                {{--<a href="#"><i class="fa fa-github"></i></a>--}}
 
-            </div>
+            {{--</div>--}}
 
         </div>
     </footer>
