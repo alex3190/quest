@@ -5,6 +5,7 @@
     </title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/shuffle.css') }}" rel="stylesheet">
     <link href="{{asset('css/footer-distributed-with-address-and-phones.css')}}" rel="stylesheet">
 
@@ -12,55 +13,87 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
+    <script>
+        $(window).scroll(function() {
+            if($(this).scrollTop() > 50)
+            {
+                $('.navbar-trans').addClass('afterscroll');
+            } else
+            {
+                $('.navbar-trans').removeClass('afterscroll');
+            }
+
+        });
+    </script>
 </head>
 
 <body class="body">
 
-<nav class="navbar navbar-inverse">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a href="/" class="navbar-brand">A Quest To Remember</a>
-    </div>
-    <!-- Collection of nav links, forms, and other content for toggling -->
-    <div id="navbarCollapse" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="{{url('/about')}}">About us</a></li>
-            {{--<li class="active"><a href="{{url('/events')}}">Events</a></li>--}}
-            {{--<li class="active"><a href="{{url('/tools')}}">Game aids</a></li>--}}
-            {{--<li class="active"><a href="{{url('/campaigns')}}">Campaigns and stories</a></li>--}}
-            <li class="active"><a href="{{url('/gallery')}}">Gallery</a></li>
-            <li class="dropdown active">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Adventures <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
-                    <li><a href="{{url('/adventures/create')}}">Create a new party</a></li>
+<nav class="navbar navbar-default navbar-doublerow navbar-trans navbar-fixed-top">
+    <!-- top nav -->
+    <nav class="navbar navbar-top hidden-xs">
+        <div class="container">
+            <!-- left nav top -->
+            <ul class="nav navbar-nav pull-left">
+                {{--<li><a href="#"><span class="glyphicon glyphicon-thumbs-up text-white"></span></a></li>--}}
+                {{--<li><a href="#"><span class="glyphicon glyphicon-globe text-white"></span></a></li>--}}
+                {{--<li><a href="#"><span class="glyphicon glyphicon-pushpin text-white"></span></a></li>--}}
+                <li><a href="#"><span class="text-white">Welcome Home, traveler!</span></a></li>
+            </ul>
+            <!-- right nav top -->
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="{{url('/about')}}">About Us</a></li>
+                <li><a href="{{url('/about')}}">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="dividline light-grey"></div>
+    </nav>
+    <!-- down nav -->
+    <nav class="navbar navbar-down">
+        <div class="container">
+            <div class="flex-container">
+                <div class="navbar-header flex-item">
+                    <a class="navbar-brand" href="{{url('/')}}"><strong>A quest to remember</strong></a>
+                </div>
+                <ul class="nav navbar-nav flex-item hidden-xs">
+                    <li class="dropdown"><a href="{{url('/gallery')}}">Gallery</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#">Adventures <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
+                            <li><a href="{{url('/adventures/create')}}">Create a new party</a></li>
+                        </ul>
+                    </li>
+                    @if($isLoggedIn)
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#"> My profile <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
-            </li>
-            @if($isLoggedIn)
-                <li class="dropdown active">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"> My profile <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
-                    </ul>
-                </li>
-            @endif
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            @if($isLoggedIn)
-                <li><a href="{{ route('logout') }}">Logout</a></li>
-            @else
-                <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
-            @endif
-        </ul>
-    </div>
+                <ul class="nav navbar-nav navbar-right">
+                    @if($isLoggedIn)
+                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </nav>
 </nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 @include('flash::message')
 @yield('content')
 </body>
