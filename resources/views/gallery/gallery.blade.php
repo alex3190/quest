@@ -2,7 +2,10 @@
 @section('content')
 
     <div class="row-fluid">
-        <input class="filter__search js-shuffle-search" type="search" placeholder="Search..." />
+        <div class="form-group row">
+            <div class="col-xs-5"><strong>Are you searching for something specific? Type in here</strong><input class="filter__search js-shuffle-search form-control" type="search" placeholder="Search for something specific..." />
+        </div>
+        </div>
     </div>
     <script>
         $(document).ready(function(){
