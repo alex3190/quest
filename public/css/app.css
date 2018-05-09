@@ -7,21 +7,23 @@
     padding-top: 50px;
     padding-left: 180px;
     padding-right: 180px;
-    padding-bottom: 180px;
-    margin-bottom: 180px;
+    padding-bottom: 6rem;
+    margin-bottom: 150px;
     background: #000000 url("background3.jpg");
     background-size: 100%;
-    background-repeat:   no-repeat;
+    background-repeat: no-repeat;
     /*background-position: center;*/
+
+}
+footer{
+    /*position: absolute;*/
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 230px;
+
 }
 
-footer.custom{
-    padding-top: 40px;
-}
-
-table.custom{
-    padding-bottom: 50px;
-}
 
 @media (max-height:800px){
     footer { position: static; }

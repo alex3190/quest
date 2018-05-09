@@ -26,7 +26,7 @@
         });
     </script>
 </head>
-
+<div class="wrapper">
 <body class="body">
 
 <nav class="navbar navbar-default navbar-doublerow navbar-trans navbar-fixed-top">
@@ -38,7 +38,11 @@
                 {{--<li><a href="#"><span class="glyphicon glyphicon-thumbs-up text-white"></span></a></li>--}}
                 {{--<li><a href="#"><span class="glyphicon glyphicon-globe text-white"></span></a></li>--}}
                 {{--<li><a href="#"><span class="glyphicon glyphicon-pushpin text-white"></span></a></li>--}}
-                <li><a href="#"><span class="text-white">Welcome Home, traveler!</span></a></li>
+                <li><a href="#"><span class="text-white">Welcome Home, traveler! </span></a></li>
+                <li><a href="{{url('/adventures')}}"><span class="text-white"><strong>Start a new adventure?</strong></span></a></li>
+                @if($isLoggedIn)
+                <li><a href="{{url('/user/' . $user->id . '/adventures')}}"><span class="text-white">Or revisit one you're already in?</span></a></li>
+                @endif
             </ul>
             <!-- right nav top -->
             <ul class="nav navbar-nav pull-right">
@@ -96,56 +100,60 @@
 
 @include('flash::message')
 @yield('content')
+
 </body>
-
+</div>
 <br>
-<footer class="footer-distributed custom">
-    <script src="{{ asset('js/shuffle.min.js') }}"></script>
-    <script src="{{ asset('js/shuffle_additional.js') }}"></script>
+<div class="footer-container">
+    <footer class="footer-distributed custom navbar-fixed-bottom">
+        <script src="{{ asset('js/shuffle.min.js') }}"></script>
+        <script src="{{ asset('js/shuffle_additional.js') }}"></script>
 
-    <div class="footer-left">
-        <h3>A<span> quest</span> to remember</h3>
-        <p class="footer-links">
-            <a href="#">About Us</a>
-            ·
-            <a href="#">Adventures</a>
-            ·
-            <a href="#">Gallery</a>
-            ·
-            <a href="#">News</a>
-            ·
-            <a href="#">Contact</a>
-        </p>
-        <p class="footer-company-name">A Quest To Remember</p>
-    </div>
-    <div class="footer-center">
-        <div>
-            <i class="fa fa-map-marker"></i>
-            <p><span>Street address</span> Bucharest</p>
+        <div class="footer-left">
+            <h3>A<span> quest</span> to remember</h3>
+            <p class="footer-links">
+                <a href="#">About Us</a>
+                ·
+                <a href="#">Adventures</a>
+                ·
+                <a href="#">Gallery</a>
+                ·
+                <a href="#">News</a>
+                ·
+                <a href="#">Contact</a>
+            </p>
+            <p class="footer-company-name">A Quest To Remember</p>
         </div>
-        <div>
-            <i class="fa fa-phone"></i>
-            <p>+00000</p>
-        </div>
-        <div>
-            <i class="fa fa-envelope"></i>
-            <p><a href="mailto:alexandra.bulearca@gmail.com">alexandra.bulearca@gmail.com</a></p>
-        </div>
-    </div>
-
-    <div class="footer-right">
-
-        <p class="footer-company-about">
-            <span>What?</span>
-            You are the storyteller and story, the ink and the writer, the play and the audience, the master and the slayer of dragons.
-        </p>
-        <div class="footer-icons">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-github"></i></a>
-
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Street address</span> Bucharest</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+00000</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:alexandra.bulearca@gmail.com">alexandra.bulearca@gmail.com</a></p>
+            </div>
         </div>
 
-    </div>
-</footer>
+        <div class="footer-right">
+
+            <p class="footer-company-about">
+                <span>What?</span>
+                You are the storyteller and story, the ink and the writer, the play and the audience, the master and the slayer of dragons.
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+
+            </div>
+
+        </div>
+    </footer>
+</div>
+
