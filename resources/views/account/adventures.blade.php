@@ -1,21 +1,19 @@
 @extends('navigation')
 @section('content')
-    <div class="panel panel-default col-md-12">
-    <table class="table table-hover table-condensed table-inverse">
-        <thead>
-        <tr>
-            <td>#</td>
-            <td>Game type</td>
-            <td>Created by</td>
-            {{--<td>Max number of players</td>--}}
-            <td>Free slots</td>
-            <td>Location</td>
-            <td>Created at</td>
-            <td>Actions</td>
-        </tr>
-        </thead>
 
-        <div class="panel-body">
+        <table class="table table-hover table-condensed table-inverse">
+            <thead>
+            <th>#</th>
+            <th>Game type</th>
+            <th>Created by</th>
+            {{--<td>Max number of players</td>--}}
+            <th>Free slots</th>
+            <th>Location</th>
+            <th>Created at</th>
+            <th>Actions</th>
+            </thead>
+
+            <tbody>
             @foreach($adventures as $adventure)
                 <tr>
                     <td>{{$adventure->id}}</td>
@@ -28,22 +26,22 @@
                     <div class="row">
                         <div class="col-md-4">
                             @if($adventure->created_by == \Illuminate\Support\Facades\Auth::user()->id)
-                            <td>
-                                <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-primary btn-block"> Manage Adventure</a>
-                            </td>
+                                <td>
+                                    <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-primary btn-block"> Manage Adventure</a>
+                                </td>
                             @else
-                            <td>
-                                {!! Form::open(['route' => ["account.leaveAdventure", \Illuminate\Support\Facades\Auth::user()->id , $adventure->id],  'method'=>"post"]) !!}
-                                {!! Form::submit('Leave adventure', ['class' =>'btn btn-sm btn-danger']) !!}
-                                {!! Form::close() !!}
-                            </td>
+                                <td>
+                                    {!! Form::open(['route' => ["account.leaveAdventure", \Illuminate\Support\Facades\Auth::user()->id , $adventure->id],  'method'=>"post"]) !!}
+                                    {!! Form::submit('Leave adventure', ['class' =>'btn btn-sm btn-danger']) !!}
+                                    {!! Form::close() !!}
+                                </td>
                             @endif
                         </div>
                     </div>
 
                 </tr>
             @endforeach
-        </div>
-    </table>
+            </tbody>
+        </table>
     </div>
 @endsection

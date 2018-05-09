@@ -50,7 +50,6 @@
 
 
     <table class="table table-hover table-condensed table-responsive table-striped">
-        <thead class="">
         <tr>
             <th>Player name</th>
             <th>Availability</th>
