@@ -127,7 +127,7 @@ class AdventuresController
      * @param $adventureId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
-     * renders the join adventure view, that also allows users to see data about the adveture.
+     * renders the join adventure view, that also allows users to see data about the adventure.
      */
     public function joinExistingAdventure($adventureId){
 
@@ -152,8 +152,6 @@ class AdventuresController
             $everyonesAvailability[]    = $attendee->availability;
             $attendeesIDs[]             = $attendee->id;
         }
-
-
 
 
         //calculate how many players are needed
