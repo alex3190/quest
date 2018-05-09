@@ -7,23 +7,22 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default col-md-12">
 
-        <table class="table table-hover table-condensed table-inverse custom">
+        <table class="table table-hover table-condensed table-responsive table-striped">
             <thead>
             <tr>
-                <td>#</td>
-                <td>Game type</td>
-                <td>Is there a DM?</td>
-                <td>Adventure creator</td>
-                <td>Free slots</td>
-                <td>Location</td>
-                <td>Created at</td>
-                <td>Actions</td>
+                <th>#</th>
+                <th>Game type</th>
+                <th>Is there a DM?</th>
+                <th>Adventure creator</th>
+                <th>Free slots</th>
+                <th>Location</th>
+                <th>Created at</th>
+                <th>Actions</th>
             </tr>
             </thead>
 
-            <div class="panel-body">
+            <tbody>
                 @foreach($adventures as $adventure)
                     <tr>
                         <td>{{$adventure->id}}</td>
@@ -57,9 +56,9 @@
                         </div>
                     </tr>
                 @endforeach
-            </div>
+            </tbody>
         </table>
-    </div>
+
     <div style="float: right;">
         {{ $adventures->links() }}
     </div>
