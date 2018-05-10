@@ -5,11 +5,9 @@
 	box-sizing: border-box;
 	width: 100%;
 	text-align: left;
+    position: absolute;
 	font: bold 16px sans-serif;
-
 	padding: 30px 50px;
-
-	margin-top: 80px;
 }
 
 .footer-distributed .footer-left,
@@ -21,7 +19,7 @@
 
 .footer-container {
     margin: 0 auto;
-    padding-top: 30px;
+    /*padding-top: auto;*/
     max-width: 640px;
     width: 94%;
 }
@@ -175,3 +173,4 @@
 	}
 
 }
+
