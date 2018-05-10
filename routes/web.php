@@ -21,6 +21,7 @@ Route::get('/about', 'AboutUsController@index');
 //Route::get('/events', 'EventsController@index');
 Route::get('/gallery', 'GalleryController@index');
 Route::get('/useful-links', 'UsefulLinksController@index');
+Route::get('/news', 'NewsController@index');
 
 //Route::get('/stories', 'StoriesController@index');
 //Route::get('/games', 'GamesController@index');
