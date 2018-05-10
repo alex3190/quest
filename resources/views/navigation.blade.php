@@ -56,6 +56,7 @@
                         <a class="navbar-brand" href="{{url('/')}}"><strong>A quest to remember</strong></a>
                     </div>
                     <ul class="nav navbar-nav flex-item hidden-xs">
+                        <li class="dropdown"><a href="{{url('/useful-links')}}">Useful Links</a></li>
                         <li class="dropdown"><a href="{{url('/gallery')}}">Gallery</a></li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#">Adventures <b class="caret"></b></a>
