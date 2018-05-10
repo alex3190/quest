@@ -23,18 +23,24 @@
 /*top nav*/
 .navbar-doublerow .navbar-top ul>li>a {
     padding: 10px auto;
-    font-size: 12px;
+    font-size: 14px;
 }
 /*down nav*/
 .navbar-doublerow .navbar-down .navbar-brand {
     padding: 0px auto;
     float: left;
-    color: #000000;
+    color: white;
+    -webkit-text-fill-color: gray; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
     font-size: 32px;
 }
 .navbar-doublerow .navbar-down ul>li>a{
     font-size: 16px;
-    color: #000000;
+    color: white;
+    -webkit-text-fill-color: gray; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
     transition: border-bottom .2s ease-in , transform .2s ease-in-out;
 }
 .navbar-doublerow .navbar-down ul>li>a:hover{
@@ -63,10 +69,25 @@
 .flex-item {
 }
 /*text*/
-.text-white,.text-white-hover:hover{color:#000000!important}
+.text-white,.text-white-hover:hover{
+    color:white!important;
+    -webkit-text-fill-color: gray; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;}
 /*fontcolor*/
-.light-grey {color:#000!important;background-color:#E6E9ED!important}
+.light-grey {
+    color:white!important;
+    background-color:white!important;
+    -webkit-text-fill-color: gray; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;}
 /*
 Dropdown menus
  */
-.dropdown-menu-bg {color:#000!important;background-color:transparent!important;}
+.dropdown-menu-bg {
+    color:white!important;
+    background-color:transparent!important;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: black;
+}
