@@ -9,7 +9,7 @@ body {
     padding-right: 180px;
     padding-bottom: 250px;
     margin-bottom: 150px;
-    background: #000000 url("background3.jpg");
+    background: #000000 url("book.jpg");
     background-size: 100%;
     background-repeat: repeat;
 }
@@ -32,6 +32,8 @@ footer{
 #mainPanel {
     padding-bottom: 20px;
     background-color: black;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .flex-container-custom {
@@ -58,6 +60,15 @@ footer{
 }
 .panel-heading-custom {
     margin-bottom: 20px;
+}
+
+#main-navbar {
+    position: relative;
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 @media (max-height:800px){

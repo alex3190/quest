@@ -1,7 +1,7 @@
 @extends('navigation')
 @section('content')
     {{--code html here--}}
-    <div class="container">
+    <div class="flex-container-custom">
         <p>
             We are a legendary group that tackled the most daring and insane quests in history. You may have heard of us. If not, roll a d20, and keep reading. We could regale you with countless stories about the rise and falls of empires and dominions, the greatest songs of tragic love or heroic deeds. But nevermind all that. Let’s skip to the only tale of any real significance. Yours and ours.
             <br>

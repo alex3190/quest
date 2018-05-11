@@ -28,65 +28,6 @@
 </head>
 <div id="holder" style="font-family: 'Trebuchet MS'">
     <body class="body">
-    <nav class="navbar navbar-default navbar-doublerow navbar-trans navbar-fixed-top">
-        <!-- top nav -->
-        <nav class="navbar navbar-top hidden-xs">
-            <div class="container">
-                <!-- left nav top -->
-                <ul class="nav navbar-nav pull-left">
-                    <li><a href=""><span class="text-white">Welcome Home, traveler! </span></a></li>
-                    <li><a href="{{url('/adventures')}}"><span class="text-white"><strong>Start a new adventure?</strong></span></a></li>
-                    @if($isLoggedIn)
-                        <li><a href="{{url('/user/' . $user->id . '/adventures')}}"><span class="text-white">Or revisit one you're already in?</span></a></li>
-                    @endif
-                </ul>
-                <!-- right nav top -->
-                <ul class="nav navbar-nav pull-right">
-                    <li><a href="{{url('/about')}}">About Us</a></li>
-                    <li><a href="{{url('/about')}}">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="dividline light-grey"></div>
-        </nav>
-        <!-- down nav -->
-        <nav class="navbar navbar-down">
-            <div class="container">
-                <div class="flex-container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{{url('/')}}"><strong>A quest to remember</strong></a>
-                        {{--                        <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('css/logo.jpg')}}" style="height: 60%; width: 30%"></a>--}}
-                    </div>
-
-                    <ul class="nav navbar-nav flex-item hidden-xs">
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#">Adventures <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
-                                <li><a href="{{url('/adventures/create')}}">Create a new party</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><a href="{{url('/news')}}">News</a></li>
-                        <li class="dropdown"><a href="{{url('/useful-links')}}">Useful Links</a></li>
-                        <li class="dropdown"><a href="{{url('/gallery')}}">Gallery</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right hidden-xs">
-                        @if($isLoggedIn)
-                            <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#"> My profile <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
-                                </ul>
-                            </li>
-                            <li class = "dropdown"><a href="{{ route('logout') }}">Logout</a></li>
-                        @else
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </nav>
 
     <br>
     <br>
@@ -95,9 +36,39 @@
     <br>
     <br>
     <div class="panel panel-default container" id="mainPanel">
-        <div class="panel-heading panel-heading-custom">
-            room for the new nav
-        </div>
+        <nav class="navbar navbar-inverse" id="main-navbar">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav flex-item hidden-xs">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{url('/')}}"><strong>A quest to remember</strong></a></div>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#">Adventures <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url('/adventures')}}">Join an existing party</a></li>
+                            <li><a href="{{url('/adventures/create')}}">Create a new party</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{url('/news')}}">News</a></li>
+                    <li><a href="{{url('/useful-links')}}">Useful Links</a></li>
+                    <li><a href="{{url('/gallery')}}">Gallery</a></li>
+                    <li><a href="{{url('/about')}}">About Us</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    @if($isLoggedIn)
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#"> My profile <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url('/user/' . $user->id . '/adventures')}}">My adventures</a></li>
+                            </ul>
+                        </li>
+                        <li class = "dropdown"><a href="{{ route('logout') }}">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @endif
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
         <div class="flex-container-custom">
 
 
