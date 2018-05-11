@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-4 form-group text-center">
                 <strong>Are you searching for something specific? </strong>
             </div>
             <div class="col-md-4"></div>
@@ -32,7 +32,6 @@
         });
     </script>
     <section class="portfolio">
-        <div class="container">
             <div class="row">
                 <div id="defaultShown">
                     <ul class="portfolio-sorting list-inline text-center">
@@ -69,6 +68,5 @@
                     <li class="col-md-4 col-sm-4 col-xs-6 shuffle_sizer"></li>
                 </ul>
             </div>
-        </div>
     </section>
 @endsection

@@ -52,9 +52,11 @@
         <nav class="navbar navbar-down">
             <div class="container">
                 <div class="flex-container">
-                    <div class="navbar-header flex-item">
+                    <div class="navbar-header">
                         <a class="navbar-brand" href="{{url('/')}}"><strong>A quest to remember</strong></a>
+                        {{--                        <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('css/logo.jpg')}}" style="height: 60%; width: 30%"></a>--}}
                     </div>
+
                     <ul class="nav navbar-nav flex-item hidden-xs">
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle dropdown-menu-bg" href="#">Adventures <b class="caret"></b></a>
@@ -92,10 +94,17 @@
     <br>
     <br>
     <br>
+    <div class="panel panel-default container" id="mainPanel">
+        <div class="panel-heading panel-heading-custom">
+            room for the new nav
+        </div>
+        <div class="flex-container-custom">
 
-    @include('flash::message')
-    @yield('content')
 
+            @include('flash::message')
+            @yield('content')
+        </div>
+    </div>
     </body>
 </div>
 

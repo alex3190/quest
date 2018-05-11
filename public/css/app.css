@@ -29,6 +29,36 @@ footer{
     padding-bottom: 60px;
 }
 
+#mainPanel {
+    padding-bottom: 20px;
+    background-color: black;
+}
+
+.flex-container-custom {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+#custom-button{
+    color: black;
+    text-shadow: 0 0 3px gray, 0 0 5px darkgrey;
+    box-shadow: 0 0 3px gray, 0 0 5px darkgrey;
+    border-radius: 10px ;
+}
+
+/*color of text on homepage*/
+#news1 {
+    color: grey;
+}
+#news2 {
+    color: grey;
+}
+#news3 {
+    color: grey;
+}
+.panel-heading-custom {
+    margin-bottom: 20px;
+}
 
 @media (max-height:800px){
     footer { position: static; }

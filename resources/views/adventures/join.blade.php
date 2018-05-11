@@ -1,11 +1,16 @@
 @extends('navigation')
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="container">
-                “Welcome traveler, your journey awaits. Here you can create a table to start your journey with friends and other adventurers. “
-            </div>
-        </div>
+    <div class="text-center" id="news1" >
+        <h4>
+            Welcome, traveler. Your journey awaits!
+        </h4>
+    </div>
+    <div class="text-center" id="news2">
+        Now that you're here, you can see details about the participants and the party!
+
+        Fill in some details about yourself, leave a message for the DM/adventure creator and hold tight!
+
+        If you decide you don't like this adventure, you can start one of your own <a href="{{route('adventures.create')}}">here! </a>
     </div>
     <div class="container">
         <div class="row">

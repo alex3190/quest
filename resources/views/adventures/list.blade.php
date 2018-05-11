@@ -1,14 +1,26 @@
 @extends('navigation')
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="container">
-                “Welcome traveler, your journey awaits. Here you can create a table to start your journey with friends and other adventurers. “
-            </div>
-        </div>
+    {{--<div class="panel panel-default">--}}
+        {{--<div class="panel-body text-center">--}}
+                {{--“Welcome traveler, your journey awaits. Here you can create a table to start your journey with friends and other adventurers. “--}}
+        {{--</div>--}}
+    {{--</div>--}}
+    <div class="text-center" id="news1" >
+        <h4>
+            Welcome, traveler. Your journey awaits!
+        </h4>
+    </div>
+    <div class="text-center" id="news2">
+        If you want to join an adventure, just click on 'Join Adventure' to see the details of each one, and then fill your application in!
+        For the adventures you created, instead of 'Join Adventure', you are able to Manage your adventure instead!
+        The creator of the adventure will receive your request and approve or deny it. Don't be sad if your request gets denied! Maybe his or her party is full, or maybe he has one too many barbarians.
+        You can apply to as many adventures as you'd like!
+
+        If you decide you don't like any of the adventures, you can start one of your own <a href="{{route('adventures.create')}}">here! </a>
     </div>
 
-        <table class="table table-hover table-condensed table-responsive table-striped">
+    <br>
+        <table class="table table-condensed table-responsive">
             <thead>
             <tr>
                 <th>#</th>
@@ -37,7 +49,7 @@
 
                                 @if(in_array($adventure->id, $isCreatorOf))
                                     <td>
-                                        <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-primary btn-block"> Manage Adventure</a>
+                                        <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-danger" id="custom-button"> Manage Adventure</a>
                                     </td>
                                 @elseif(in_array($adventure->id, $cantJoinAdventures))
                                     <td>
@@ -45,7 +57,7 @@
                                     </td>
                                 @else
                                     <td>
-                                        <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm btn-primary btn-block"> Join Adventure</a>
+                                        <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm da" id="custom-button"> Join Adventure</a>
 
                                     </td>
                                 @endif
