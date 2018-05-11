@@ -53,11 +53,11 @@
                                     </td>
                                 @elseif(in_array($adventure->id, $cantJoinAdventures))
                                     <td>
-                                        'Sorry, you already applied'
+                                        Sorry, you already applied
                                     </td>
                                 @else
                                     <td>
-                                        <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm da" id="custom-button"> Join Adventure</a>
+                                        <a href="{{url('adventures/'.$adventure->id.'/join')}}" name="join" class="btn btn-sm btn-danger" id="custom-button"> Join Adventure</a>
 
                                     </td>
                                 @endif

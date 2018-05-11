@@ -27,7 +27,7 @@
                         <div class="col-md-4">
                             @if($adventure->created_by == \Illuminate\Support\Facades\Auth::user()->id)
                                 <td>
-                                    <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-primary btn-block"> Manage Adventure</a>
+                                    <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-danger btn-block" id="custom-button"> Manage Adventure</a>
                                 </td>
                             @else
                                 <td>
