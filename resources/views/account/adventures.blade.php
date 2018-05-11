@@ -25,7 +25,9 @@
                     <td>{{$adventure->created_at}}</td>
                     <div class="row">
                         <div class="col-md-4">
-                            @if($adventure->created_by == \Illuminate\Support\Facades\Auth::user()->id)
+
+                        @if($adventure->created_by == \Illuminate\Support\Facades\Auth::user()->id)
+
                                 <td>
                                     <a href="{{url('adventures/'.$adventure->id.'/manage')}}" name="edit" class="btn btn-sm btn-danger btn-block" id="custom-button"> Manage Adventure</a>
                                 </td>
@@ -33,6 +35,9 @@
                                 <td>
                                     {!! Form::open(['route' => ["account.leaveAdventure", \Illuminate\Support\Facades\Auth::user()->id , $adventure->id],  'method'=>"post"]) !!}
                                     {!! Form::submit('Leave adventure', ['class' =>'btn btn-sm btn-danger']) !!}
+                                    {!! Form::close() !!}
+                                    {!! Form::open(['route' => ["adventures.viewAdventure", \Illuminate\Support\Facades\Auth::user()->id , $adventure->id],  'method'=>"get"]) !!}
+                                    {!! Form::submit('View adventure', ['class' =>'btn btn-sm btn-danger']) !!}
                                     {!! Form::close() !!}
                                 </td>
                             @endif

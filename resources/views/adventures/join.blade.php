@@ -139,7 +139,7 @@
             </div>
         </div>
         <div class="clearfix text-center">
-            {!! Form::submit('Join this adventure now!', ['class' =>'btn btn-sm btn-danger', 'id' => 'custom-button']) !!}
+            {!! Form::submit('Apply', ['class' =>'btn btn-sm btn-danger', 'id' => 'custom-button']) !!}
         </div>
 
         {!! Form::close() !!}

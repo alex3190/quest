@@ -61,9 +61,9 @@
 
                                     </td>
                                 @endif
-
-
-
+                                    <td>
+                                        <a href="{{url('adventures/'.$adventure->id.'/view')}}" name="view" class="btn btn-sm btn-danger" id="custom-button"> View Adventure</a>
+                                    </td>
                             </div>
                         </div>
                     </tr>

@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function(){
         Route::post('{id}/join', 'AdventuresController@confirmJoinExistingAdventure')->name('adventures.confirmJoin');
         Route::get('{id}/join', 'AdventuresController@joinExistingAdventure')->name('adventures.join');
         Route::get('{id}/manage', 'AdventuresController@manageAdventure')->name('adventures.getManager');
+        Route::get('{id}/view', 'AdventuresController@viewAdventure')->name('adventures.viewAdventure');
         Route::patch('{id}/manage', 'AdventuresController@saveAdventure')->name('adventures.saveAdventure');
         Route::get('{id}/confirmDelete', 'AdventuresController@delete')->name('adventures.delete');
         Route::delete('{id}/confirmDelete', 'AdventuresController@confirmDelete')->name('adventures.confirmDelete');

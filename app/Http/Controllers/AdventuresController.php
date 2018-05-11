@@ -80,6 +80,24 @@ class AdventuresController
         return view('adventures.create', $pageData);
     }
 
+    public function viewAdventure($adventureId) {
+        $adventure = Adventure::find($adventureId);
+        $attendees = Adventure::find($adventureId)->attendees;
+
+        foreach($attendees as $attendee) {
+
+            $attendee->name = AdventureAttendee::find($attendee->id)->user->name;
+        }
+
+
+        $viewData = [
+            'adventure' => $adventure,
+            'attendees' => $attendees
+        ];
+
+        return view('adventures.view', $viewData);
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -233,6 +251,7 @@ class AdventuresController
 
         return redirect('/adventures');
     }
+
     public function manageAdventure($adventureId) {
 
         $adventure = Adventure::find($adventureId);
