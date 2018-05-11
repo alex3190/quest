@@ -15,6 +15,36 @@
 </br>
 
 <table class="table table-condensed table-responsive">
+    <thead>
+    <tr>
+        <th>Game Id</th>
+        <th>Game type</th>
+        <th>Adventure creator</th>
+        <th>Free slots</th>
+        <th>Location</th>
+        <th>Created at</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{$adventure->id}}</td>
+            <td>{{$adventure->game_type}}</td>
+            <td>{{$adventure->created_by_name}}</td>
+            <td>{{$adventure->freeSlots}}</td>
+            <td>{{$adventure->city}}</td>
+            <td>{{$adventure->created_at}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<div class="text-center" id="news2">
+    Here are some additional details about the participants! Get to know your future adventuring party!
+</div>
+
+<br>
+<table class="table table-condensed table-responsive">
     <tr>
         <th>Actions/Info</th>
         <th>Player name</th>
