@@ -80,7 +80,7 @@
 </div>
 
 <div class="footer-container">
-    <footer class="footer-distributed custom">
+    <footer class="footer-distributed custom img-responsive">
         <script src="{{ asset('js/shuffle.min.js') }}"></script>
         <script src="{{ asset('js/shuffle_additional.js') }}"></script>
 
