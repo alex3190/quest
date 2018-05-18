@@ -15,7 +15,7 @@ class Adventures extends Migration
     {
         Schema::create('adventures', function(Blueprint $table) {
             $table->increments('id');
-            $table->enum('game_type', ['dnd5e', 'pathfinder', 'numenera', 'boardgames']);
+            $table->enum('game_type', ['dnd5e', 'boardgames', 'pathfinder', 'numenera']);
             $table->integer('max_nr_of_players')->nullable();
             $table->string('city')->nullable();
             $table->integer('created_by')->nullable();

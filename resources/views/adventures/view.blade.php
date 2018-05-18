@@ -70,7 +70,6 @@
                 {!! Form::close() !!}
             </td>
             @else
-
                 <td>
                     You have no power here!
                 </td>
@@ -96,28 +95,28 @@
                 @if($attendee->place == NULL)
                     None
                 @else
-                    $attendee->place
+                    {{$attendee->place}}
                 @endif
             </td>
             <td>
                 @if($attendee->inventory == NULL)
                     None
                 @else
-                    $attendee->inventory
+                    {{$attendee->inventory}}
                 @endif
             </td>
             <td>
                 @if($attendee->experience_with_games == NULL)
                     None
                 @else
-                    $attendee->experience_with_games
+                    {{$attendee->experience_with_games}}
                 @endif
             </td>
             <td>
                 @if($attendee->message_to_creator == NULL)
                     None
                 @else
-                    $attendee->message_to_creator
+                    {{$attendee->message_to_creator}}
                 @endif
             </td>
             <td>{{ucfirst($attendee->application_status)}}</td>

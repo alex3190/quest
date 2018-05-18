@@ -6,7 +6,7 @@
             <th>#</th>
             <th>Game type</th>
             <th>Created by</th>
-            {{--<td>Max number of players</td>--}}
+            <td>Max number of players</td>
             <th>Free slots</th>
             <th>Location</th>
             <th>Created at</th>
@@ -19,7 +19,7 @@
                     <td>{{$adventure->id}}</td>
                     <td>{{$adventure->game_type}}</td>
                     <td>{{$adventure->created_by_name}}</td>
-                    {{--<td>{{$adventure->max_nr_of_players}}</td>--}}
+                    <td>{{$adventure->max_nr_of_players}}</td>
                     <td>{{$adventure->freeSlots}}</td>
                     <td>{{$adventure->city}}</td>
                     <td>{{$adventure->created_at}}</td>

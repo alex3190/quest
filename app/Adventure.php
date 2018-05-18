@@ -21,10 +21,10 @@ class Adventure extends Model
     const GAME_BOARD_ANY = 'boardgames';
 
     const GAMES = [
-        self::GAME_DND_5E,
-        self::GAME_BOARD_ANY,
-        self::GAME_DND_PATHFINDER,
-        self::GAME_NUMENERA
+        0=>self::GAME_DND_5E,
+        1=>self::GAME_BOARD_ANY,
+        2=>self::GAME_DND_PATHFINDER,
+        3=>self::GAME_NUMENERA
     ];
 
     /**

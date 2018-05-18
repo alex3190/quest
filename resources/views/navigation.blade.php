@@ -32,9 +32,6 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
     <div class="panel panel-default container" id="mainPanel">
         <nav class="navbar navbar-inverse" id="main-navbar">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

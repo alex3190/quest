@@ -52,7 +52,7 @@ class AdventuresController
                 $dmName                         = User::find($firstAttendeeThatIsDm->user_id)->name;
             }
 
-            $adventure->freeSlots = $adventure->max_nr_of_players - Adventure::find($adventure->id)->attendees()->count() + 1; //1 because we don't count the dm
+            $this->howManySlotsLeft($adventure);
         }
 
         $pageData = [
@@ -89,6 +89,7 @@ class AdventuresController
             $attendee->name = AdventureAttendee::find($attendee->id)->user->name;
         }
 
+        $adventure->created_by_name         = User::find($adventure->created_by)->name;
 
         $viewData = [
             'adventure' => $adventure,
@@ -96,6 +97,18 @@ class AdventuresController
         ];
 
         return view('adventures.view', $viewData);
+    }
+
+    /**
+     * @param $adventure
+     * @return int
+     *
+     * Math. How many slots are left.
+     */
+    public static function howManySlotsLeft($adventure){
+        $adventure->freeSlots = $adventure->max_nr_of_players - Adventure::find($adventure->id)->attendees()->count() + 1; //1 because we don't count the dm
+
+        return $adventure->freeSlots;
     }
 
     /**
@@ -136,7 +149,7 @@ class AdventuresController
         flash()
             ->success(
                 'Succesfully created adventure #' . $adventure->id .
-                ". You can now view it in the adventure list by clicking" ."<a href='/adventures'> here </a>" . "or administrating it from" ."<a href=$myAccountAdventureLink> your acocunt </a>")
+                ". You can now view it in the adventure list or directly by clicking" ."<a href='/adventures/".$adventure->id."/view' > here </a>" . "or administrating it from" ."<a href=$myAccountAdventureLink> your acocunt </a>")
             ->important();
         return back();
     }
@@ -257,6 +270,7 @@ class AdventuresController
         $adventure = Adventure::find($adventureId);
         $attendees = Adventure::find($adventureId)->attendees;
 
+
         foreach($attendees as $attendee) {
 
             $attendee->name = AdventureAttendee::find($attendee->id)->user->name;
@@ -267,22 +281,25 @@ class AdventuresController
             'adventure' => $adventure,
             'attendees' => $attendees
         ];
-
         return view('adventures.manage', $viewData);
     }
 
     public function saveAdventure(Request $request, $adventureId) {
         $adventure = Adventure::find($adventureId);
-//        $selectedCreator = User::where('name', $request->get('created_by'))->first();
-//        dd($selectedCreator);
-//changing creator postponed
 
-        //@todo fix bug where default selected is incorrect
-        $adventure->game_type           = strtolower($request->get('game_type'));
-        $adventure->city                = $request->get('city');
-        $adventure->max_nr_of_players   = $request->get('max_nr_of_players');
+        if ($request->get('game_type') != null) {
+            $adventure->game_type = $request->get('game_type');
+        }
+
+        if ($request->get('city') != null) {
+            $adventure->city = $request->get('city');
+        }
+
+        if ($request->get('max_nr_of_players') != null) {
+            $adventure->max_nr_of_players = $request->get('max_nr_of_players');
+        }
+
         $adventure->save();
-
         return back();
     }
 

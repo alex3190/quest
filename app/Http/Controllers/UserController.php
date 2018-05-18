@@ -28,7 +28,7 @@ class UserController extends Controller
             } else {
                 $adventure->dungeon_master_name = 'No DM signed up yet!';
             }
-            $adventure->freeSlots = $adventure->max_nr_of_players - Adventure::find($adventure->id)->attendees()->count() +1; //1 because we don't count the dm
+            AdventuresController::howManySlotsLeft($adventure);
         }
 
         $viewData = [
@@ -39,7 +39,17 @@ class UserController extends Controller
     }
 
     public function leaveAdventure($userId, $adventureId) {
-        $attendee = Adventure::find($adventureId)->attendees()->where('user_id', $userId);
+        $adventure = Adventure::find($adventureId);
+        $attendee = $adventure->attendees()->where('user_id', $userId);
+
+        if(Auth::id() == $adventure->created_by) {
+            flash()
+                ->error(
+                    'You cannot leave the adventure you created!'
+                )
+                ->important();
+            return back();
+        }
         $attendee->delete();
         flash()
             ->success(
