@@ -284,11 +284,13 @@ class AdventuresController
         return view('adventures.manage', $viewData);
     }
 
+    //new and edit should not be different
+
     public function saveAdventure(Request $request, $adventureId) {
         $adventure = Adventure::find($adventureId);
-
+//dd($request->get('game_type'));
         if ($request->get('game_type') != null) {
-            $adventure->game_type = $request->get('game_type');
+            $adventure->game_type = Adventure::GAMES[$request->get('game_type')];
         }
 
         if ($request->get('city') != null) {
@@ -303,31 +305,32 @@ class AdventuresController
         return back();
     }
 
-    /**
-     * Do NOT remove $adventureId
-     */
-    public function changeAttendeeStatus($adventureId, $attendeeId, $status) {
-
+    //@todo fix links between adventure and attendee
+    public function approveAttendee($adventureId, $attendeeId) {
         $adventureAttendee = AdventureAttendee::find($attendeeId);
-        $adventureAttendee->application_status = $status;
+        $adventureAttendee->application_status = AdventureAttendee::APPLICATION_STATUS_ACCEPTED;
         $adventureAttendee->save();
 
         return back();
     }
 
-    public function approveAttendee($adventureId, $attendeeId) {
-        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_ACCEPTED);
-        return back();
-    }
     public function rejectAttendee($adventureId, $attendeeId) {
-        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_REJECTED);
-        return back();
-    }
-    public function resetAttendee($adventureId, $attendeeId) {
-        $this->changeAttendeeStatus($adventureId, $attendeeId, AdventureAttendee::APPLICATION_STATUS_NOT_REVIEWED);
+        $adventureAttendee = AdventureAttendee::find($attendeeId);
+        $adventureAttendee->application_status = AdventureAttendee::APPLICATION_STATUS_REJECTED;
+        $adventureAttendee->save();
+
         return back();
     }
 
+    public function resetAttendee($adventureId, $attendeeId) {
+        $adventureAttendee = AdventureAttendee::find($attendeeId);
+        $adventureAttendee->application_status = AdventureAttendee::APPLICATION_STATUS_NOT_REVIEWED;
+        $adventureAttendee->save();
+
+        return back();
+    }
+
+    //@todo this should be model-related
     public function validateJoin(int $creatorId, array $participantIds) {
         if(Auth::id() == $creatorId || in_array(Auth::id(), $participantIds)) {
             return false;

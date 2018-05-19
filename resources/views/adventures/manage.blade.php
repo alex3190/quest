@@ -22,24 +22,9 @@
 
             <div class="form-group">
                 {!! Form::label('game_type', 'Change the type of the game to be played', ['class' => 'col-md-5 col-lg-5']) !!}
-                @if($adventure->game_type == \App\Adventure::GAME_DND_5E)
-                    <div class="col-md-7 col-lg-7">
-                        {!! Form::select('game_type', \App\Adventure::GAMES, \App\Adventure::GAME_DND_5E, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value'=>$adventure->game_type]) !!}
-                    </div>
-                    @elseif($adventure->game_type == \App\Adventure::GAME_BOARD_ANY)
-                    <div class="col-md-7 col-lg-7">
-                        {!! Form::select('game_type', \App\Adventure::GAMES, \App\Adventure::GAME_BOARD_ANY, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value'=>$adventure->game_type]) !!}
-                    </div>
-                    @elseif($adventure->game_type == \App\Adventure::GAME_DND_PATHFINDER)
-                    <div class="col-md-7 col-lg-7">
-                        {!! Form::select('game_type', \App\Adventure::GAMES, \App\Adventure::GAME_DND_PATHFINDER, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value'=>$adventure->game_type]) !!}
-                    </div>
-                    @elseif($adventure->game_type == \App\Adventure::GAME_NUMENERA)
-                    <div class="col-md-7 col-lg-7">
-                        {!! Form::select('game_type', \App\Adventure::GAMES, \App\Adventure::GAME_NUMENERA, ["class"=>"form-control input-md", "style"=>"text-transform: capitalize", 'value'=>$adventure->game_type]) !!}
-                    </div>
-
-                @endif
+                <div class="col-md-7 col-lg-7">
+                {!! Form::select('game_type', \App\Adventure::GAMES, array_search($adventure->game_type, \App\Adventure::GAMES), ["class"=>"form-control input-md", "style"=>"text-transform: capitalize"]) !!}
+                </div>
             </div>
             <div class="form-group">
                 {!! Form::label('city', 'In which city will you play?', ['class' => 'col-md-5 col-lg-5']) !!}
